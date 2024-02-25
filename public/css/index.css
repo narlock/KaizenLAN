@@ -1,0 +1,167 @@
+/* styles.css */
+
+body {
+    background-color: #484848;
+    /* Grey background color */
+    font-family: 'Fira Code', monospace;
+    /* Set Fira Code as the default font */
+    color: #ffffff;
+    /* Set default text color to white */
+}
+
+.off-white-text {
+    color: #9c9c9c;
+    /* Set off-white text color for elements with the class 'off-white-text' */
+}
+
+h1 {
+    font-size: 64px;
+}
+
+p {
+    /* Additional styling for paragraphs if needed */
+    font-size: 16px;
+    /* Adjust font size as needed */
+}
+
+.topnav a {
+    float: left;
+    position: relative;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 10px 10px;
+    text-decoration: none;
+    font-size: 17px;
+
+}
+
+.topnav-right {
+    float: right;
+    position: relative;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 10px 10px;
+    padding-top: 50px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+/* Add the tooltip styling */
+.tooltip {
+    position: absolute;
+    background-color: #000;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 1;
+}
+
+/* Position the tooltip above the link */
+.tooltip.top {
+    bottom: calc(100% + 5px);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Position the tooltip above the right-aligned links */
+.tooltip.right {
+    top: 50%;
+    left: calc(100% + 5px);
+    transform: translateY(-50%);
+}
+
+.menuLink img {
+    transition: filter 0.3s; /* Add transition for smooth effect */
+}
+
+.menuLink:hover img {
+    filter: brightness(100%) sepia(100%) hue-rotate(120deg);
+}
+
+
+#homeLink img {
+    content: url('../kaizen_logo.png');
+    width: 325px;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%; /* Set a specific width for consistency */
+    justify-content: space-around; /* Adjust as needed */
+}
+
+.box {
+    flex: 1;
+    min-width: 300px;
+    margin: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+}
+
+@media only screen and (min-width: 901px) {
+    /* Show the tooltip on hover */
+    .topnav a:hover .tooltip {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    /* Customize tooltip content for each link */
+    .topnav a[href="/lists"] .tooltip::before {
+        content: 'Manage Lists';
+    }
+
+    .topnav a[href="/schedule"] .tooltip::before {
+        content: 'Manage Schedule';
+    }
+
+    .topnav a[href="/weight"] .tooltip::before {
+        content: 'Manage Weight';
+    }
+
+    .topnav a[href="/water"] .tooltip::before {
+        content: 'Manage Hydration';
+    }
+
+    .topnav a[href="/journal"] .tooltip::before {
+        content: 'Manage Journal';
+    }
+
+    .topnav a[href="/settings"] .tooltip::before {
+        content: 'Change Settings';
+    }
+}
+
+@media only screen and (max-width: 900px) {
+
+    /* Adjust the size for screens with a maximum width of 600px (typical for phones) */
+    #homeLink img {
+        content: url('../kaizen_icon.png');
+        width: 32px;
+    }
+
+    .menuLink img {
+        width: 25px;
+        height: 25px;
+    }
+
+    p {
+        /* Additional styling for paragraphs if needed */
+        font-size: 8px;
+        /* Adjust font size as needed */
+    }
+
+    .topnav-right {
+        padding-top: 5px;
+    }
+
+    .box {
+        flex-basis: 100%; /* Set the basis to 100% for stacking */
+        margin: auto;
+        margin-top: 20px;
+    }
+}
