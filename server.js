@@ -14,6 +14,11 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+app.get('/profile', (req, res) => {
+  // Send the HTML file
+  res.sendFile(path.join(__dirname, 'public/profile.html'));
+});
+
 app.get('/lists', (req, res) => {
   // Send the HTML file
   res.sendFile(path.join(__dirname, 'public/lists.html'));

@@ -5,17 +5,38 @@ body {
     /* Grey background color */
     font-family: 'Fira Code', monospace;
     /* Set Fira Code as the default font */
-    color: #ffffff;
-    /* Set default text color to white */
-}
-
-.off-white-text {
     color: #9c9c9c;
     /* Set off-white text color for elements with the class 'off-white-text' */
 }
 
+footer {
+    padding-top: 20px;
+    text-align: center;
+}
+
+footer a {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit text color from parent */
+}
+
+footer a:hover {
+    color: #00a657; /* Change color on hover */
+}
+
+h3, b {
+    color: #ffffff;
+}
+
+p {
+    color: #9c9c9c;
+}
+
 h1 {
     font-size: 64px;
+}
+
+button {
+    margin-left: 10px;
 }
 
 p {
@@ -111,6 +132,10 @@ p {
     }
 
     /* Customize tooltip content for each link */
+    .topnav a[href="/profile"] .tooltip::before {
+        content: 'View Profile';
+    }
+
     .topnav a[href="/lists"] .tooltip::before {
         content: 'Manage Lists';
     }
@@ -145,14 +170,8 @@ p {
     }
 
     .menuLink img {
-        width: 25px;
-        height: 25px;
-    }
-
-    p {
-        /* Additional styling for paragraphs if needed */
-        font-size: 8px;
-        /* Adjust font size as needed */
+        width: 20px;
+        height: 20px;
     }
 
     .topnav-right {

@@ -7,6 +7,8 @@
     <title>Manage Weight • Kaizen LAN</title>
     <link rel="stylesheet" href="css/index.css">
     <link rel="icon" type="image/x-icon" href="kaizen_icon.png">
+    <!-- Include Chart.js from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -15,6 +17,10 @@
             <img src="kaizen_icon.png">
         </a>
         <div class="topnav-right">
+            <a href="/profile" class="menuLink">
+                <span class="tooltip top"></span>
+                <img src="res/view_profile.png">
+            </a>
             <a href="/lists" class="menuLink">
                 <span class="tooltip top"></span>
                 <img src="res/manage_lists.png">
@@ -50,8 +56,12 @@
         <div class="box"><h3 id="stats"></h3></div>
     </div>
     <div class="container">
-        <div class="box"><h3 id="graph"></h3></div>
+        <div class="box">
+            <h3 id="graph"></h3>
+            <canvas id="myChart" style="width:100%;max-height:400px"></canvas>
+        </div>
     </div>
+    <footer>Kaizen LAN v1.0.0 • Created by <a href="https://github.com/narlock">narlock</a></footer>
     <script src="js/weight.js"></script>
 </body>
 
