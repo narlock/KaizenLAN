@@ -1,5 +1,6 @@
 const HOST_ADDRESS = "192.168.0.129"
 let TODAY_ENTRY = null
+var myChart = null
 
 /**
  * =================
@@ -10,10 +11,7 @@ let TODAY_ENTRY = null
 document.addEventListener("DOMContentLoaded", function () {
     setWeightBoxInformation()
     todayEntry()
-    createGraph();
 });
-
-
 
 function setWeightBoxInformation() {
     // Set checklist information
@@ -24,23 +22,27 @@ function setWeightBoxInformation() {
 
     // set Graph settings
     var graphBox = document.getElementById('graph')
-    graphBox.innerText = 'Graph'
+
+    var graphBoxTitle = document.createElement('h3')
+    graphBoxTitle.id = 'graphBoxTitle'
+    graphBoxTitle.innerText = 'Graph'
 
     var weekViewButton = document.createElement('button')
     weekViewButton.innerText = 'Week View'
     weekViewButton.id = 'weightGraphWeekView'
-    weekViewButton.addEventListener('click', weightGraphWeekView);
+    weekViewButton.addEventListener('click', createWeekGraph);
 
     var monthViewButton = document.createElement('button')
     monthViewButton.innerText = 'Month View'
     monthViewButton.id = 'weightGraphMonthView'
-    monthViewButton.addEventListener('click', weightGraphWeekView);
+    monthViewButton.addEventListener('click', createMonthGraph);
 
     var yearViewButton = document.createElement('button')
     yearViewButton.innerText = 'Year View'
     yearViewButton.id = 'weightGraphYearView'
-    yearViewButton.addEventListener('click', weightGraphWeekView);
+    yearViewButton.addEventListener('click', createYearGraph);
 
+    graphBox.appendChild(graphBoxTitle);
     graphBox.appendChild(weekViewButton);
     graphBox.appendChild(monthViewButton);
     graphBox.appendChild(yearViewButton);
@@ -78,25 +80,52 @@ function todayEntry() {
 
 /**
  * =================
- * INITIALIZE GRAPH
+ * GRAPH
  * =================
  */
 
-let WEEKLY_RESPONSE = null;
+let GRAPH_RESPONSE = null;
 
-function createGraph() {
+function createWeekGraph() {
+    getGraphEntries(7);
+    document.getElementById('graphBoxTitle').innerText = 'Graph (Week View)'
+}
+
+function createMonthGraph() {
+    getGraphEntries(30);
+    document.getElementById('graphBoxTitle').innerText = 'Graph (Month View)'
+}
+
+function createYearGraph() {
+    getGraphEntries(365);
+    document.getElementById('graphBoxTitle').innerText = 'Graph (Year View)'
+}
+
+function getGraphEntries(daysAgo) {
+    if(myChart) {
+        myChart.destroy();
+        myChart = null;
+    }
+
     // Default to show Week View
     var today = getCurrentDateString()
-    var sevenDaysAgo = getDaysAgoDateString(7)
-    console.log(`attempting to retrieve /weight/range?startDate=${sevenDaysAgo}&endDate=${today}`)
+    var daysAgo = getDaysAgoDateString(daysAgo)
+    console.log(`attempting to retrieve /weight/range?startDate=${daysAgo}&endDate=${today}`)
     var xmlhttp = new XMLHttpRequest();
 
     xmlhttp.onreadystatechange = function() {
         if(this.readyState == 4 && this.status == 200) {
-            // There is an entry for today
-            WEEKLY_RESPONSE = JSON.parse(xmlhttp.response)
-            console.log(`weekly response successfully returned`)
-            displayWeekGraph("myChart")
+            GRAPH_RESPONSE = JSON.parse(xmlhttp.response)
+
+            const xValues = [];
+            const yValues = [];
+
+            GRAPH_RESPONSE.entries.forEach(element => {
+                xValues.push(element.date)
+                yValues.push(element.weight)
+            });
+
+            displayGraph("myChart", xValues, yValues);
         } else if (this.readyState == 4) {
             // Some error occurred`
             var response = JSON.parse(xmlhttp.response)
@@ -104,26 +133,17 @@ function createGraph() {
         }
     };
 
-    xmlhttp.open("GET", `http://${HOST_ADDRESS}:8081/weight/range?startDate=${sevenDaysAgo}&endDate=${today}`, true)
+    xmlhttp.open("GET", `http://${HOST_ADDRESS}:8081/weight/range?startDate=${daysAgo}&endDate=${today}`, true)
     xmlhttp.send();
 }
 
-function displayWeekGraph(element) {
-    const xValues = [];
-    const yValues = [];
-
-    console.log(WEEKLY_RESPONSE)
-    WEEKLY_RESPONSE.entries.forEach(element => {
-        xValues.push(element.date)
-        yValues.push(element.weight)
-    });
-
-    const myChart = new Chart(element, {
+function displayGraph(element, xValues, yValues) {
+    myChart = new Chart(element, {
         type: "line",
         data: {
             labels: xValues,
             datasets: [{
-                label: "Weight Trend (Week View)",
+                label: "Weight Trend",
                 fill: false,
                 lineTension: 0.2,
                 backgroundColor: "rgba(0,235,123,1.0)",
@@ -176,7 +196,6 @@ function displayWeekGraph(element) {
 function showCreateWeightInterface(elementId) {
     var element = document.getElementById(elementId)
 
-    // TODO create a special div with an id that can be styled
     var createWeightDiv = document.createElement('div')
     createWeightDiv.id = 'createWeightDiv'
 
@@ -196,7 +215,17 @@ function showCreateWeightInterface(elementId) {
     createWeightDiv.appendChild(weightEntryBox)
     createWeightDiv.appendChild(weightEntrySubmit)
     element.appendChild(createWeightDiv)
-    // TODO add the special div that is styled
+
+    // Recreate the graph view - based off of what is already there...
+    graph_text = document.getElementById('graphBoxTitle').innerText
+    if(graph_text.includes('Month')) {
+        createMonthGraph();
+    } else if(graph_text.includes('Year')) {
+        createYearGraph();
+    } else {
+        createWeekGraph();
+    }
+    
 }
 
 // Function to be called when the button is clicked
@@ -221,6 +250,7 @@ function createWeightEntry(entry) {
     xmlhttp.onreadystatechange = function() {
         if(this.readyState == 4 && this.status == 201) {
             console.log("successfully created, change to view")
+            TODAY_ENTRY = JSON.parse(xmlhttp.response)
             removeCreateWeightInterface();
             showTodayWeightInterface("weight");
         } else if(this.readyState == 4) {
@@ -240,7 +270,7 @@ function createWeightEntry(entry) {
 function removeCreateWeightInterface() {
     var createWeightDiv = document.getElementById('createWeightDiv')
     if (createWeightDiv) {
-        document.removeChild(createWeightDiv);
+        createWeightDiv.remove();
     }
 }
 
@@ -260,6 +290,7 @@ function showTodayWeightInterface(elementId) {
     displayWeightDiv.innerHTML = `<p>Today's weight: <b>${TODAY_ENTRY.weight}</b></p>`
 
     element.appendChild(displayWeightDiv)
+    createWeekGraph()
 }
 
 /**
