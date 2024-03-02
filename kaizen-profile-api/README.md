@@ -40,7 +40,7 @@ Content-type: application/json
 {
   "username": "myUsername",
   "age": 25,
-  "birth_date": 1999-01-01,
+  "birth_date": "1999-01-01",
   "image_url": "",
   "xp": 0,
   "health": {
@@ -60,7 +60,7 @@ HTTP/1.1 201 Created
   "id": 1,
   "username": "myUsername",
   "age": 25,
-  "birth_date": 1999-01-01,
+  "birth_date": "1999-01-01",
   "image_url": "",
   "xp": 0,
   "health": {
@@ -87,7 +87,7 @@ HTTP/1.1 200 OK
   "id": 1,
   "username": "myUsername",
   "age": 25,
-  "birth_date": 1999-01-01,
+  "birth_date": "1999-01-01",
   "image_url": "",
   "xp": 0,
   "health": {
@@ -108,7 +108,7 @@ Content-type: application/json
 {
   "username": "myUsername",
   "age": 25,
-  "birth_date": 1999-01-01,
+  "birth_date": "1999-01-01",
   "image_url": "",
   "xp": 0,
   "health": {
@@ -128,7 +128,7 @@ HTTP/1.1 200 OK
   "id": 1,
   "username": "myUsername",
   "age": 25,
-  "birth_date": 1999-01-01,
+  "birth_date": "1999-01-01",
   "image_url": "",
   "xp": 0,
   "health": {
