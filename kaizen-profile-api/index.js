@@ -161,7 +161,6 @@ app.delete('/profile/:id', (req, res) => {
             connection.query(deleteProfileQuery, [id], (deleteProfileError, deleteProfileResults) => {
                 if (deleteProfileError) {
                     console.error('Error deleting profile:', deleteProfileError);
-                    // If there's an error, you might want to handle accordingly (rollback the health entry deletion, etc.)
                     res.status(500).json({
                         message: 'Internal Server Error',
                         detail: 'Error deleting profile in the database'
@@ -173,8 +172,6 @@ app.delete('/profile/:id', (req, res) => {
         }
     });
 });
-
-
 
 // Start the server
 app.listen(port, () => {

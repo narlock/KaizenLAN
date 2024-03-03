@@ -10,9 +10,8 @@
 
 This section assumes that the user of this software has the knowledge of installing Node.js and running Node applications. It also assumes that the user knows how to install and configure a MySQL database server.
 - **MySQL**: With MySQL running, configure and run the `setup_database.sql` script to create the **narlock-kaizen** database.
-- **Run the application**
-  - Using **Docker**: In a terminal, run `docker-compose up -d` to run the API.
-  - Using **Node**: navigate to this directory in a terminal and run `node index.js` to run this API.
+- You will need to install `express` and `mysql` dependencies.
+- Using **Node**: navigate to this directory in a terminal and run `node index.js` to run this API.
 
 ## Application Design
 
