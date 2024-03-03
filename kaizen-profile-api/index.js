@@ -1,6 +1,7 @@
 // Import necessary modules
 const express = require('express');
 const mysql = require('mysql');
+const cors = require('cors');
 const app = express();
 const port = 8079;
 
@@ -14,13 +15,14 @@ const connection = mysql.createConnection({
 
 // Express Configuration
 app.use(express.json());
+app.use(cors()); // This is here so we can allow any requests to go through
 
 // POST endpoint to create profile
 app.post('/profile', (req, res) => {
     const { username, age, birth_date, image_url, xp, health } = req.body;
 
     // Step 1: Insert into Profile table
-    const profileQuery = 'INSERT INTO Profile (age, birth_date, image_url, xp) VALUES (?, ?, ?, ?)';
+    const profileQuery = 'INSERT INTO Profile (age, username, birth_date, image_url, xp) VALUES (?, ?, ?, ?, ?)';
     connection.query(profileQuery, [age, birth_date, image_url, xp], (profileError, profileResults) => {
         if (profileError) {
             console.error('Error creating profile:', profileError);
@@ -56,7 +58,7 @@ app.post('/profile', (req, res) => {
 // GET endpoint to retrieve data
 app.get('/profile/:id', (req, res) => {
     const id = req.params.id;
-    const query = 'SELECT p.id, p.age, DATE_FORMAT(p.birth_date, "%Y-%m-%d") AS birth_date, p.image_url, p.xp, h.height, h.weight, h.goal_weight AS goalWeight, h.goal_water AS goalWater ' +
+    const query = 'SELECT p.id, p.username, p.age, DATE_FORMAT(p.birth_date, "%Y-%m-%d") AS birth_date, p.image_url, p.xp, h.height, h.weight, h.goal_weight AS goalWeight, h.goal_water AS goalWater ' +
                   'FROM Profile p ' +
                   'LEFT JOIN Health h ON p.id = h.profile_id ' +
                   'WHERE p.id = ? LIMIT 1';
@@ -73,6 +75,7 @@ app.get('/profile/:id', (req, res) => {
             if (results.length > 0) {
                 const profileData = {
                     id: results[0].id,
+                    username: results[0].username,
                     age: results[0].age,
                     birth_date: results[0].birth_date,
                     image_url: results[0].image_url,

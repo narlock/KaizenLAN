@@ -1,6 +1,7 @@
 const HOST_ADDRESS = "192.168.0.129"
 let TODAY_ENTRY = null
 var myChart = null
+var PROFILE = null;
 
 /**
  * =================
@@ -10,8 +11,31 @@ var myChart = null
 
 document.addEventListener("DOMContentLoaded", function () {
     setWeightBoxInformation()
-    todayEntry()
+    getProfileEntry();
+    todayEntry();
 });
+
+function getProfileEntry() {
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function () {
+        if(this.readyState == 4 && this.status == 200) {
+            // Show profile details
+            PROFILE = JSON.parse(xmlhttp.response)
+            console.log(PROFILE)
+            showStats();
+        } else if (this.readyState == 4 && this.status == 404) {
+            // Show create profile details
+            console.log("Profile not found, showing create profile interface")
+        } else if (this.readyState == 4) {
+            // Unknown error occurred
+            console.error("an unexpected error occurred when calling kaizen-profile-api (is it running?)")
+        }
+    };
+
+    xmlhttp.open('GET', `http://${HOST_ADDRESS}:8079/profile/1`);
+    xmlhttp.send();
+}
 
 function setWeightBoxInformation() {
     // Set checklist information
@@ -70,12 +94,79 @@ function todayEntry() {
         } else if (this.readyState == 4) {
             // Some error occurred`
             var response = JSON.parse(xmlhttp.response)
-            console.error(`an unexpected error occurred when calling simple-time-block-api ${response.error}`)
+            console.error(`an unexpected error occurred when calling simple-time-block-api (is it running?)`)
         }
     };
 
     xmlhttp.open("GET", `http://${HOST_ADDRESS}:8081/weight?date=${today}`, true)
     xmlhttp.send();
+}
+
+/**
+ * =================
+ * SHOW STATS
+ * =================
+ */
+
+function showStats() {
+    var bmi = getBmi();
+    var bmiString = getBmiString(bmi);
+
+    console.log('showing stats interface')
+    var element = document.getElementById('stats')
+
+    // TODO create a special div with an id that can be styled
+    var displayStatsDiv = document.createElement('div')
+    displayStatsDiv.id = 'displayStatsDiv'
+    displayStatsDiv.innerHTML = `<p>BMI: <b>${bmi}</b> [<b class="bmi">${bmiString}</b>]</p>`
+
+    element.appendChild(displayStatsDiv)
+
+    var bmiElement = document.querySelector('.bmi');
+    bmiElement.classList.remove('underweight', 'normal', 'overweight', 'obese');
+    bmiElement.classList.add(bmiString.toLowerCase());
+}
+
+function getBmi() {
+    var heightInInches = PROFILE.health.height;
+    var weightInPounds = PROFILE.health.weight;
+    
+    // Convert height from inches to meters (1 inch = 0.0254 meters)
+    var heightInMeters = heightInInches * 0.0254;
+
+    // Convert weight from pounds to kilograms (1 pound = 0.453592 kilograms)
+    var weightInKilograms = weightInPounds * 0.453592;
+
+    // Calculate BMI
+    var bmi = weightInKilograms / (heightInMeters * heightInMeters);
+
+    // Round the BMI to two decimal places
+    bmi = Math.round(bmi * 100) / 100;
+
+    return bmi;
+}
+
+function getBmiString(bmi) {
+    if (bmi < 18.5) {
+        return "Underweight";
+    } else if (bmi >= 18.5 && bmi < 25) {
+        return "Normal";
+    } else if (bmi >= 25 && bmi < 30) {
+        return "Overweight";
+    } else {
+        return "Obese";
+    }
+}
+
+function updateStats() {
+    var displayStatsDiv = document.getElementById('displayStatsDiv')
+    var bmi = getBmi();
+    var bmiString = getBmiString(bmi);
+    displayStatsDiv.innerHTML = `<p>BMI: <b>${bmi}</b> [<b class="bmi">${bmiString}</b>]</p>`
+
+    var bmiElement = document.querySelector('.bmi');
+    bmiElement.classList.remove('underweight', 'normal', 'overweight', 'obese');
+    bmiElement.classList.add(bmiString.toLowerCase());
 }
 
 /**
@@ -235,6 +326,7 @@ function handleCreateWeightClick() {
     if(isFloatingPointNumber(entry)) {
         // Make call to backend api
         createWeightEntry(entry);
+        updateWeightOnProfile(entry);
     } else {
         alert(`Unexpected entry value: ${entry}, please enter a valid weight entry.`)
     }
@@ -267,6 +359,27 @@ function createWeightEntry(entry) {
     xmlhttp.send(jsonData);
 }
 
+function updateWeightOnProfile(entry) {
+    PROFILE.health.weight = entry;
+    // gain 10 xp points for entering in daily weight
+    PROFILE.xp = PROFILE.xp + 10;
+    
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("PUT", `http://${HOST_ADDRESS}:8079/profile/1`, true)
+    xmlhttp.setRequestHeader("Content-Type", "application/json")
+
+    xmlhttp.onreadystatechange = function() {
+        if(this.readyState == 4 && this.status == 200) {
+            console.log("successfully updated profile")
+            updateStats();
+        } else if(this.readyState == 4) {
+            console.error("an unexpected error occurred when calling kaizen-profile-api (is it running?)")
+        }
+    }
+    var jsonData = JSON.stringify(PROFILE)
+    xmlhttp.send(jsonData);
+}
+
 function removeCreateWeightInterface() {
     var createWeightDiv = document.getElementById('createWeightDiv')
     if (createWeightDiv) {
@@ -291,16 +404,6 @@ function showTodayWeightInterface(elementId) {
 
     element.appendChild(displayWeightDiv)
     createWeekGraph()
-}
-
-/**
- * =================
- * VIEW GRAPH FUNCTIONS
- * =================
- */
-
-function weightGraphWeekView() {
-
 }
 
 /**

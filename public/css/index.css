@@ -23,12 +23,16 @@ footer a:hover {
     color: #00a657; /* Change color on hover */
 }
 
-h3, b {
+h2, h3, b {
     color: #ffffff;
 }
 
 p {
     color: #9c9c9c;
+}
+
+.special {
+    color: #00eb7b;
 }
 
 h1 {
@@ -115,6 +119,13 @@ p {
     justify-content: space-around; /* Adjust as needed */
 }
 
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
 .box {
     flex: 1;
     min-width: 300px;
@@ -122,6 +133,57 @@ p {
     padding: 20px;
     box-sizing: border-box;
     border: 1px solid #ccc;
+}
+
+.boxNoBorder {
+    flex: 1;
+    min-width: 300px;
+    margin: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.hiddenBox {
+    flex: 1;
+    min-width: 300px;
+    margin: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#profile img {
+    float: left;
+    margin-right: 20px;
+    width: 200px;
+    height: 200px;
+}
+
+#xpBarProgress {
+    margin-top: 50px;
+    width: 100%;
+    background-color: grey;
+}
+
+#xpBar {
+    width: 1%;
+    height: 30px;
+    background-color: #00eb7b;
+}
+
+.bmi.underweight {
+    color: rgb(0, 145, 255);
+}
+
+.bmi.normal {
+    color: #00eb7b;
+}
+
+.bmi.overweight {
+    color: orange;
+}
+
+.bmi.obese {
+    color: red;
 }
 
 @media only screen and (min-width: 901px) {
@@ -182,5 +244,14 @@ p {
         flex-basis: 100%; /* Set the basis to 100% for stacking */
         margin: auto;
         margin-top: 20px;
+    }
+
+    .hiddenBox {
+        display: none;
+    }
+
+    #profile img {
+        width: 175px;
+        height: 175px;
     }
 }

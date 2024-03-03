@@ -51,3 +51,4 @@ Based off of [Kaizen](https://github.com/narlock/Kaizen), which is a local Java 
 - Multiprofile: require users to "login" to their profile. This allows multiple users to have a profile to utilize Kaizen LAN.
     - This includes the functionality of providing a password (or not) to sign in to a profile.
 - Anti Habit API integration
+- Ability to pick and choose what widgets to see on the home screen.
