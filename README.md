@@ -16,3 +16,7 @@
 This program's intention is to run the server, the MySQL database, and each of these microservices on the same computer system within the desired local area network. From there, any device connected to the network can access Kaizen.
 
 ![Concept View](./readme%20assets/Concept.png)
+
+## Concept Idea
+
+Based off of [Kaizen](https://github.com/narlock/Kaizen), which is a local Java application that contains a Todo list, habit tracker, journal, and anti habit tracker, I wanted a way to be able to access the features that Kaizen offered through my devices without connecting to any outside server. The solution I came up with was hosting my own server and database and being able to connect to it through local area network. This means that all I have to do is run the server and its required applications, and I can get all of the benefits of Kaizen from any device connected to my network.
