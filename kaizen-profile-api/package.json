@@ -1,0 +1,15 @@
+{
+  "name": "kaizen-profile-api",
+  "version": "1.0.0",
+  "description": "![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB) ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "narlock",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.3",
+    "mysql": "^2.18.1"
+  }
+}
