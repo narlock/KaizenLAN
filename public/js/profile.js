@@ -78,16 +78,20 @@ function displayProfile() {
     </span>
     `;
 
+    var xpBarDiv = document.createElement('div');
+    xpBarDiv.classList.add('center-container');
+    
     var xpBarElement = document.createElement('div');
     xpBarElement.id = 'xpBarProgress';
     var xpBar = document.createElement('div');
     xpBar.id = 'xpBar';
     xpBarElement.appendChild(xpBar);
+    xpBarDiv.appendChild(xpBarElement);
 
     mainDiv.appendChild(imageElement);
     mainDiv.appendChild(contentElement);
     profileDiv.appendChild(mainDiv);
-    profileDiv.appendChild(xpBarElement);
+    profileDiv.appendChild(xpBarDiv);
 
     moveXpBar(PROFILE_ENTRY.xp, profileDiv);
 }

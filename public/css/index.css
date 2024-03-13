@@ -159,9 +159,10 @@ p {
 }
 
 #xpBarProgress {
-    margin-top: 50px;
     width: 100%;
+    max-width: 400px;
     background-color: grey;
+    border: 1px solid #ccc;
 }
 
 #xpBar {
