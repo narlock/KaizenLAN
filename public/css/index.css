@@ -126,6 +126,39 @@ p {
     margin-top: 30px;
 }
 
+.add-button {
+    margin: 20px;
+    padding-top: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 4px;
+    font-size: 25px;
+    background-color: #00eb7b;
+    color: black;
+    font-weight: bold;
+}
+
+.checkBoxLabel {
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+.checkBoxLabel input {
+    width: 24px;
+    height: 24px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.checkBoxIncomplete {
+    color: white;
+}
+
+.blockDiv {
+    display: block;
+}
+
 .box {
     flex: 1;
     min-width: 300px;
