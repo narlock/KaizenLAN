@@ -261,7 +261,7 @@ p {
 
     /* Adjust the size for screens with a maximum width of 600px (typical for phones) */
     #homeLink img {
-        content: url('../kaizen_icon.png');
+        content: url('../kaizen_icon_outline.png');
         width: 32px;
     }
 

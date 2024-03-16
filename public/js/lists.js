@@ -5,6 +5,7 @@ var DAILY_ITEMS = null;
 var NIGHT_ITEMS = null;
 
 document.addEventListener("DOMContentLoaded", function () {
+    getProfileEntry();
     retrieveListInformation();
     addButtonsToDom();
 });
@@ -250,6 +251,7 @@ function addItemToChecklistDiv(checklistDiv, element, checklistName) {
             xmlhttp.onreadystatechange = function () {
                 if(this.readyState == 4 && this.status == 200) {
                     console.log("Backend updated");
+                    giveExperienceToProfile(PROFILE_ENTRY, 5);
                 } else if(this.readyState == 4) {
                     console.error("An unexpected error occurred when calling simple-checklist-api. Is it running?")
                 }
@@ -277,4 +279,44 @@ function areDatesEqual(date1, date2) {
     return date1.getFullYear() === date2.getFullYear() &&
            date1.getMonth() === date2.getMonth() &&
            date1.getDate() === date2.getDate();
+}
+
+function giveExperienceToProfile(profile, amount) {
+    profile.xp = profile.xp + amount;
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("PUT", `http://${HOST_ADDRESS}:8079/profile/1`, true)
+    xmlhttp.setRequestHeader("Content-Type", "application/json")
+
+    xmlhttp.onreadystatechange = function() {
+        if(this.readyState == 4 && this.status == 200) {
+            console.log("successfully updated profile")
+        } else if(this.readyState == 4) {
+            console.error("an unexpected error occurred when calling kaizen-profile-api (is it running?)")
+        }
+    }
+    var jsonData = JSON.stringify(profile)
+    xmlhttp.send(jsonData);
+}
+
+let PROFILE_ENTRY = null;
+function getProfileEntry() {
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function () {
+        if(this.readyState == 4 && this.status == 200) {
+            // Show profile details
+            PROFILE_ENTRY = JSON.parse(xmlhttp.response)
+        } else if (this.readyState == 4 && this.status == 404) {
+            // Show create profile details
+            console.log("Profile not found, showing create profile interface")
+
+            // TODO add create profile logic
+        } else if (this.readyState == 4) {
+            // Unknown error occurred
+            console.error("an unexpected error occurred when calling kaizen-profile-api (is it running?)")
+        }
+    };
+
+    xmlhttp.open('GET', `http://${HOST_ADDRESS}:8079/profile/1`, true);
+    xmlhttp.send();
 }
