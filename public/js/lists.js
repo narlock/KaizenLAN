@@ -37,7 +37,7 @@ function addButtonToDom(rootElement, checklistName) {
     rootElement.appendChild(addItemDiv);
 
     button.addEventListener('click', () => {
-        // TODO input validation against textfield
+        // input validation against textfield
         // then add the item to the list on backend
         // then call the getList again
         // if success, make sure to set itemTextField's text to nothing
@@ -99,9 +99,6 @@ function getMorningList() {
             // Retrieved the list
             MORNING_ITEMS = JSON.parse(xmlhttp.response);
             console.log(`retrieved morning items: ${MORNING_ITEMS}`)
-            // TODO call method to dynamically show the list
-            // make sure it deletes if some div already exists so that
-            // we can just call this method to "refresh" the list
             populateMorningChecklistItems();
         } else if(this.readyState == 4) {
             console.error("An unexpected error occurred when calling simple-checklist-api. Is it running?")
@@ -122,6 +119,68 @@ function populateMorningChecklistItems() {
 
     MORNING_ITEMS.forEach(element => {
         addItemToChecklistDiv(morningChecklistItemsDiv, element, 'morning');
+    });
+}
+
+function getDailyList() {
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function () {
+        if(this.readyState == 4 && this.status == 200) {
+            // Retrieved the list
+            DAILY_ITEMS = JSON.parse(xmlhttp.response);
+            console.log(`retrieved daily items: ${DAILY_ITEMS}`)
+            populateDailyChecklistItems();
+        } else if(this.readyState == 4) {
+            console.error("An unexpected error occurred when calling simple-checklist-api. Is it running?")
+        }
+    };
+
+    xmlhttp.open('GET', `http://${HOST_ADDRESS}:8085/checklist-item?checklistName=daily`);
+    xmlhttp.send();
+}
+
+function populateDailyChecklistItems() {
+    var dailyChecklistItemsDiv = document.getElementById('dayChecklistItems');
+
+    // Remove each dom child - they will be dynamically readded
+    while(dailyChecklistItemsDiv.firstChild) {
+        dailyChecklistItemsDiv.removeChild(dailyChecklistItemsDiv.firstChild);
+    }
+
+    DAILY_ITEMS.forEach(element => {
+        addItemToChecklistDiv(dailyChecklistItemsDiv, element, 'daily');
+    });
+}
+
+function getNightList() {
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function () {
+        if(this.readyState == 4 && this.status == 200) {
+            // Retrieved the list
+            NIGHT_ITEMS = JSON.parse(xmlhttp.response);
+            console.log(`retrieved night items: ${NIGHT_ITEMS}`)
+            populateNightChecklistItems();
+        } else if(this.readyState == 4) {
+            console.error("An unexpected error occurred when calling simple-checklist-api. Is it running?")
+        }
+    };
+
+    xmlhttp.open('GET', `http://${HOST_ADDRESS}:8085/checklist-item?checklistName=night`);
+    xmlhttp.send();
+}
+
+function populateNightChecklistItems() {
+    var nightChecklistItemsDiv = document.getElementById('nightChecklistItems');
+
+    // Remove each dom child - they will be dynamically readded
+    while(nightChecklistItemsDiv.firstChild) {
+        nightChecklistItemsDiv.removeChild(nightChecklistItemsDiv.firstChild);
+    }
+
+    NIGHT_ITEMS.forEach(element => {
+        addItemToChecklistDiv(nightChecklistItemsDiv, element, 'night');
     });
 }
 
@@ -200,46 +259,6 @@ function addItemToChecklistDiv(checklistDiv, element, checklistName) {
             xmlhttp.send();
         }
     });
-}
-
-function getDailyList() {
-    var xmlhttp = new XMLHttpRequest();
-
-    xmlhttp.onreadystatechange = function () {
-        if(this.readyState == 4 && this.status == 200) {
-            // Retrieved the list
-            DAILY_ITEMS = JSON.parse(xmlhttp.response);
-            console.log(`retrieved daily items: ${DAILY_ITEMS}`)
-            // TODO call method to dynamically show the list
-            // make sure it deletes if some div already exists so that
-            // we can just call this method to "refresh" the list
-        } else if(this.readyState == 4) {
-            console.error("An unexpected error occurred when calling simple-checklist-api. Is it running?")
-        }
-    };
-
-    xmlhttp.open('GET', `http://${HOST_ADDRESS}:8085/checklist-item?checklistName=daily`);
-    xmlhttp.send();
-}
-
-function getNightList() {
-    var xmlhttp = new XMLHttpRequest();
-
-    xmlhttp.onreadystatechange = function () {
-        if(this.readyState == 4 && this.status == 200) {
-            // Retrieved the list
-            NIGHT_ITEMS = JSON.parse(xmlhttp.response);
-            console.log(`retrieved night items: ${NIGHT_ITEMS}`)
-            // TODO call method to dynamically show the list
-            // make sure it deletes if some div already exists so that
-            // we can just call this method to "refresh" the list
-        } else if(this.readyState == 4) {
-            console.error("An unexpected error occurred when calling simple-checklist-api. Is it running?")
-        }
-    };
-
-    xmlhttp.open('GET', `http://${HOST_ADDRESS}:8085/checklist-item?checklistName=night`);
-    xmlhttp.send();
 }
 
 /**
