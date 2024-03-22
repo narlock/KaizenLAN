@@ -47,6 +47,12 @@ Once each microservice is running, you can start the Kaizen LAN server by using 
 
 Based off of [Kaizen](https://github.com/narlock/Kaizen), which is a local Java application that contains a Todo list, habit tracker, journal, and anti habit tracker, I wanted a way to be able to access the features that Kaizen offered through my devices without connecting to any outside server. The solution I came up with was hosting my own server and database and being able to connect to it through local area network. This means that all I have to do is run the server and its required applications, and I can get all of the benefits of Kaizen from any device connected to my network.
 
+## First Iteration
+
+![First Iteration](./readme%20assets/Interface.png)
+
+The first iteration of Kaizen LAN introduces a simple interface utilizing the checklist api, water tracking api, profile api, and weight tracking api. The navigation bar at the top of the screen expands on each of the widgets that appear on the home screen.
+
 ## Future Enhancements
 - Multiprofile: require users to "login" to their profile. This allows multiple users to have a profile to utilize Kaizen LAN.
     - This includes the functionality of providing a password (or not) to sign in to a profile.
