@@ -73,7 +73,21 @@ app.get('/profile/:id', (req, res) => {
             });
         } else {
             if (results.length > 0) {
-                res.json(results[0]);
+                const profileData = {
+                    id: results[0].id,
+                    username: results[0].username,
+                    age: results[0].age,
+                    birth_date: results[0].birth_date,
+                    image_url: results[0].image_url,
+                    xp: results[0].xp,
+                    health: {
+                        height: results[0].height,
+                        weight: results[0].weight,
+                        goalWeight: results[0].goalWeight,
+                        goalWater: results[0].goalWater
+                    }
+                };
+                res.json(profileData);
             } else {
                 res.status(404).json({
                     message: 'Profile not found',
