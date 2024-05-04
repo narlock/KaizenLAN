@@ -1,17 +1,19 @@
 // Import necessary modules
 const express = require('express');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const cors = require('cors');
 const app = express();
 const port = 8079;
 
 // MySQL Connection Pool
 const pool = mysql.createPool({
-  connectionLimit : 10, // The maximum number of connections to create at once. (Adjust as needed)
-  host: 'localhost',
-  user: 'root',
-  password: 'password',
-  database: 'narlock'
+    host: 'localhost',
+    user: 'root',
+    password: 'password',
+    database: 'narlock',
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
 // Express Configuration
