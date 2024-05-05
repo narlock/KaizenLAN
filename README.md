@@ -37,15 +37,13 @@ This application offers a interface that contains many different self improvemen
 
 ![Concept View](./readme%20assets/Concept.png)
 
-<center><b>Legend</b>
-
+.center[
 | Color  | Description |
 | ------------- | ------------- |
 | Green  | Application running with Node  |
 | Orange  | Application running with Java  |
 | Blue  | Database from MySQL  |
-
-</center>
+]
 
 # Running Kaizen LAN
 
