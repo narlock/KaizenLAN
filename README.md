@@ -88,7 +88,7 @@ Once the setup is complete, you can run the `start.sh` script in a new terminal.
 > [!WARNING]  
 > By running this application, you are running roughly 10+ applications on your system. RAM usage may vary.
 
-Once the script completes, you can choose to exit the terminal if you wish. Next, you can navigate to `http://localhost:3000/` to access Kaizen LAN.
+Once the script completes, you can choose to exit the terminal if you wish. Next, you can navigate to **http://localhost:3000/** to access Kaizen LAN.
 
 ### Stopping the application
 
