@@ -1,5 +1,8 @@
 # Kaizen LAN
 
+> [!NOTE]  
+> This README is currently a **plan** for Kaizen LAN. There are no current releases at this time and the first version is in development.
+
 ### Frontend
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
@@ -51,14 +54,45 @@ To utilize all of the features of Kaizen LAN, you will need to designate a compu
 - **[Node.js](https://nodejs.org/en) version 18 or higher** (used to run Kaizen LAN server and Kaizen Profile API)
 - **[Java](https://openjdk.org/projects/jdk/) version 17 or higher** and **Maven version 3 or higher** (used to build and run each microservice)
 - **[MySQL](https://www.mysql.com/) version 8 or higher** (used to run the MySQL database)
+- **Bash or related terminal interface**
+    - macOS testing using [Zsh](https://en.wikipedia.org/wiki/Z_shell) (preinstalled on macOS)
+    - Linux (Ubuntu) testing using [GNOME](https://en.wikipedia.org/wiki/GNOME_Terminal) (preinstalled on Ubuntu 22)
+    - Windows testing using [Git Bash](https://git-scm.com/downloads) (NOT preinstalled)
 
 ## Starting the app
 
-Each microservice contains it's own documentation for how to run. The important thing to note is that you do not modify any ports that they run on, as Kaizen LAN is configured to call each microservice by their default port.
+You can download the latest release of the application from the **[releases page](https://github.com/narlock/KaizenLAN/releases)**. The package release will contain all the files needed to run the application.
 
-You must have a configured MySQL server running, and have ran each database setup for this application and each microservice. You also need to make sure that each microservice is properly configured.
+### Initial Setup
 
-Once each microservice is running, you can start the Kaizen LAN server by using `node server.js` in your terminal. The server will start on port `3000`. For connecting to this server, you can use `http://localhost:3000/` from the server computer, or connect to it by finding your LAN address and going to port 3000. This document assumes the reader knows how to obtain the LAN address of their server computer.
+For initial setup, you must have your MySQL instance running on your machine. Open the `setup.sh` file to configure with your MySQL credentials:
+```bash
+#!/bin/bash
+
+# MySQL credentials
+MYSQL_USER="your_mysql_username"
+MYSQL_PASSWORD="your_mysql_password"
+MYSQL_HOST="localhost"
+MYSQL_DB="your_database_name"
+```
+Specifically, you will need to modify the `MYSQL_USER`, `MYSQL_PASSWORD`, and `MYSQL_DB` values. Kaizen LAN was designed to run on the local machine, so there is no need to modify the host value.
+
+Running this script will create and configure the MySQL database along with each table utilized in this application. If the setup was successful, you will see a message that reads "`SUCCESS: Kaizen LAN setup complete`". If the setup was unsuccessful, you will see a message that reads "`FAILURE: Setup was unable to complete`".
+
+### Run the application
+
+<!-- ** TODO - add information regarding LAN setup ** -->
+
+Once the setup is complete, you can run the `start.sh` script in a new terminal. This will launch the Kaizen LAN server, Kaizen GraphQL API, and each microservice utilized by this application.
+
+> [!WARNING]  
+> By running this application, you are running roughly 10+ applications on your system. RAM usage may vary.
+
+Once the script completes, you can choose to exit the terminal if you wish. Next, you can navigate to `http://localhost:3000/` to access Kaizen LAN.
+
+### Stopping the application
+
+When the start script is ran, it will run all of the required applications for Kaizen LAN in the background. The stop script will end each process that was opened by the start script. Simply just run the `stop.sh` script in a terminal.
 
 # Concept Idea
 
@@ -74,4 +108,3 @@ The first iteration of Kaizen LAN introduces a simple interface utilizing the ch
 - Multiprofile: require users to "login" to their profile. This allows multiple users to have a profile to utilize Kaizen LAN.
     - This includes the functionality of providing a password (or not) to sign in to a profile.
 - Anti Habit API integration
-- Ability to pick and choose what widgets to see on the home screen.
