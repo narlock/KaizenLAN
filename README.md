@@ -18,10 +18,11 @@
 
 This program's intention is to run the server, the MySQL database, and each of these microservices on the same computer system within the desired local area network. From there, any device connected to the network can access Kaizen. In simple terms, one LAN device will run the Kaizen server application, and any other LAN device can use a web browser to interact with the application.
 
+## Concept View
+
 ![Concept View](./readme%20assets/Concept.png)
 
 **Legend**
-- Grey: LAN devices (computer, smartphone, etc.)
 - Green: Software that runs using Node.js
 - Orange: Software that runs using Java
 - Blue: MySQL database
