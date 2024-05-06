@@ -51,23 +51,25 @@
     where each div with class box represents an individual
     widget. For each id, we can load the widget with the
     script. -->
-    <div class="container">
-        <div class="box"><h3 id="checklist"></h3>
-            <div id="checklistItems" class="center-container blockDiv"></div>
-        </div>
-        <div class="box"><h3 id="schedule"></h3></div>
-    </div>
-    <div class="container">
-        <div class="box"><h3 id="profile"></h3></div>
-        <div class="box">
-            <div class="boxNoBorder">
-                <h3 id="weight"></h3>
-                <canvas id="myWeightChart" style="width:100%;max-height:700px"></canvas>
+    <div id="main">
+        <div class="container">
+            <div class="box"><h3 id="checklist"></h3>
+                <div id="checklistItems" class="center-container blockDiv"></div>
             </div>
-            <div class="boxNoBorder"><h3 id="water"></h3></div>
+            <div class="box"><h3 id="schedule"></h3></div>
         </div>
-        
+        <div class="container">
+            <div class="box"><h3 id="profile"></h3></div>
+            <div class="box">
+                <div class="boxNoBorder">
+                    <h3 id="weight"></h3>
+                    <canvas id="myWeightChart" style="width:100%;max-height:700px"></canvas>
+                </div>
+                <div class="boxNoBorder"><h3 id="water"></h3></div>
+            </div>
+        </div>
     </div>
+    
     <script src="js/index.js"></script>
     <footer>Kaizen LAN v1.0.0 • Created by <a href="https://github.com/narlock">narlock</a></footer>
 </body>
