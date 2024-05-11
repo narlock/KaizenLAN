@@ -33,7 +33,7 @@ This application offers a interface that contains many different self improvemen
 - **Time blocking** (planned for v1.0.0)
 - **Journal** (planned for v1.0.0)
 - **Countdown workout** (planned for v1.0.0)
-- **Food calorie tracking** (planned for v1.0.0)
+- **Food calorie tracking** (planned for v1.1.0)
 - **Todo list** (planned for v1.1.0)
 
 # Concept View
@@ -58,6 +58,20 @@ To utilize all of the features of Kaizen LAN, you will need to designate a compu
     - macOS testing using [Zsh](https://en.wikipedia.org/wiki/Z_shell) (preinstalled on macOS)
     - Linux (Ubuntu) testing using [GNOME](https://en.wikipedia.org/wiki/GNOME_Terminal) (preinstalled on Ubuntu 22)
     - Windows testing using [Git Bash](https://git-scm.com/downloads) (NOT preinstalled)
+
+## Dependencies
+
+This application requires other applications to run alongside of it. These applications are outlined in the concept view.
+- [Kaizen GraphQL API](https://github.com/narlock/kaizen-graphql-api)
+- [Kaizen Profile API](https://github.com/narlock/kaizen-profile-api)
+- [Narlock Checklist API](https://github.com/narlock/narlock-checklist-api)
+- [Narlock Weight Track API](https://github.com/narlock/narlock-weight-track-api)
+- [Narlock Water Track API](https://github.com/narlock/narlock-water-track-api)
+- [Narlock Habit Track API](https://github.com/narlock/narlock-habit-track-api)
+- [Narlock Notepad API](https://github.com/narlock/narlock-notepad-api)
+- [Narlock Time Block API](https://github.com/narlock/narlock-time-block-api)
+- [Narlock Journal API](https://github.com/narlock/narlock-journal-api)
+- [Narlock Countdown Workout API](https://github.com/narlock/narlock-countdown-workout-api)
 
 ## Starting the app
 
