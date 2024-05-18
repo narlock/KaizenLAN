@@ -28,12 +28,12 @@ This application offers a interface that contains many different self improvemen
 - **Weight tracking** (planned for v1.0.0)
 - **Water/hydration tracking** (planned for v1.0.0)
 - **Habit tracking** (planned for v1.0.0)
-- **Text/CSV editor** (planned for v1.0.0)
-- **Time blocking** (planned for v1.0.0)
-- **Journal** (planned for v1.0.0)
 - **Countdown workout** (planned for v1.0.0)
-- **Food calorie tracking** (planned for v1.1.0)
-- **Todo list** (planned for v1.1.0)
+- **Text/CSV editor** (planned for v1.1.0)
+- **Time blocking** (planned for v1.1.0)
+- **Journal** (planned for v1.1.0)
+- **Food calorie tracking** (planned for v1.2.0)
+- **Todo list** (planned for v1.2.0)
 
 # Concept View
 
