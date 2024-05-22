@@ -24,16 +24,16 @@
 
 This application offers a interface that contains many different self improvement tools. The goal is to provide the user a customized experience to help continuously improve their lives through the use of small and simple tools. The following tools are planned to be included in Kaizen LAN:
 - **Kaizen profile** (planned for v1.0.0)
-- **Morning, daily, and night checklists** (planned for v1.0.0)
 - **Weight tracking** (planned for v1.0.0)
 - **Water/hydration tracking** (planned for v1.0.0)
 - **Habit tracking** (planned for v1.0.0)
-- **Text/CSV editor** (planned for v1.0.0)
-- **Time blocking** (planned for v1.0.0)
-- **Journal** (planned for v1.0.0)
-- **Countdown workout** (planned for v1.0.0)
-- **Food calorie tracking** (planned for v1.1.0)
-- **Todo list** (planned for v1.1.0)
+- **Routine checklists** (planned for v1.1.0)
+- **Text/CSV editor** (planned for v1.1.0)
+- **Time blocking** (planned for v1.1.0)
+- **Journal** (planned for v1.1.0)
+- **Food calorie tracking** (planned for v1.2.0)
+- **Todo list** (planned for v1.2.0)
+  **Countdown workout** (planned for v1.2.0)
 
 # Concept View
 
