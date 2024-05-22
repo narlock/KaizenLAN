@@ -61,12 +61,16 @@ To utilize all of the features of Kaizen LAN, you will need to designate a compu
 ## Dependencies
 
 This application requires other applications to run alongside of it. These applications are outlined in the concept view.
+
+**Currently Implemented**
 - [Kaizen GraphQL API](https://github.com/narlock/kaizen-graphql-api)
 - [Kaizen Profile API](https://github.com/narlock/kaizen-profile-api)
-- [Narlock Checklist API](https://github.com/narlock/narlock-checklist-api)
 - [Narlock Weight Track API](https://github.com/narlock/narlock-weight-track-api)
 - [Narlock Water Track API](https://github.com/narlock/narlock-water-track-api)
 - [Narlock Habit Track API](https://github.com/narlock/narlock-habit-track-api)
+
+**Dependencies that will be added in future releases**
+- [Narlock Checklist API](https://github.com/narlock/narlock-checklist-api)
 - [Narlock Notepad API](https://github.com/narlock/narlock-notepad-api)
 - [Narlock Time Block API](https://github.com/narlock/narlock-time-block-api)
 - [Narlock Journal API](https://github.com/narlock/narlock-journal-api)
