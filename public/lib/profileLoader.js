@@ -1,22 +1,30 @@
+const GRAPH_ENDPOINT = "http://localhost:8080/graphql";
+
+/**
+ * 
+ * @param {*} profileId 
+ * @returns 
+ */
 async function getKaizenProfileById(profileId) {
-    const url = "http://localhost:8080/graphql"; // Ensure 'http://' is included
     const query = `
         query {
             profile(id: ${profileId}) {
-                id
-                username
-                birthDate
-                imageUrl
-                xp
-                numRows
-                pin
+                profile {
+                    id
+                    username
+                    birthDate
+                    imageUrl
+                    xp
+                    numRows
+                    pin
+                }
                 health {
                     weight
                     height
                     goalWeight
                     goalWater
                 }
-                rows {
+                rowInfoList {
                     rowIndex
                     widgets
                 }
@@ -31,13 +39,87 @@ async function getKaizenProfileById(profileId) {
         body: JSON.stringify({ query })
     };
     try {
-        const response = await fetch(url, options);
+        const response = await fetch(GRAPH_ENDPOINT, options);
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        return await response.json();
+        var responseBody = await response.json();
+        return responseBody.data.profile
     } catch (error) {
         console.error('Error fetching data:', error);
+        alert("An unexpected error occurred retrieivng profile information - are the APIs running?")
+    }
+}
+
+async function updateKaizenProfile(data) {
+    const rowInfoListString = data.rowInfoList.map(rowInfo => `{
+        profileId: ${rowInfo.profileId}
+        rowIndex: ${rowInfo.rowIndex}
+        widgets: "${rowInfo.widgets}"
+    }`);
+
+    const mutation = `
+        mutation {
+            updateProfile(input: {
+                profile: {
+                    id: ${data.profile.id}
+                    username: "${data.profile.username}"
+                    birthDate: "${data.profile.birthDate}"
+                    imageUrl: "${data.profile.imageUrl}"
+                    xp: ${data.profile.xp}
+                    numRows: ${data.profile.numRows}
+                    pin: "${data.profile.pin}"
+                }
+                health: {
+                    height: ${data.health.height}
+                    weight: ${data.health.weight}
+                    goalWeight: ${data.health.goalWeight}
+                    goalWater: ${data.health.goalWater}
+                }
+                rowInfoList: [
+                    ${rowInfoListString}
+                ]
+            }) {
+                profile {
+                    id
+                    username
+                    birthDate
+                    imageUrl
+                    xp
+                    numRows
+                    pin
+                }
+                health {
+                    weight
+                    height
+                    goalWeight
+                    goalWater
+                }
+                rowInfoList {
+                    rowIndex
+                    widgets
+                }
+            }
+        }
+    `;
+    console.log(mutation);
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ query: mutation })
+    };
+    try {
+        const response = await fetch(GRAPH_ENDPOINT, options);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        var responseBody = await response.json();
+        return responseBody.data.profile
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        alert("An unexpected error occurred retrieivng profile information - are the APIs running?")
     }
 }
 
@@ -51,4 +133,4 @@ function createKaizenProfileWidget(div, profile) {
     console.log("Hello");
 }
 
-export { getKaizenProfileById, createKaizenProfileWidget }
+export { getKaizenProfileById, createKaizenProfileWidget, updateKaizenProfile }

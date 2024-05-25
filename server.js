@@ -19,14 +19,14 @@ app.get('/profile', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/profile.html'));
 });
 
-app.get('/lists', (req, res) => {
+app.get('/habit', (req, res) => {
   // Send the HTML file
-  res.sendFile(path.join(__dirname, 'public/lists.html'));
+  res.sendFile(path.join(__dirname, 'public/habit.html'));
 });
 
-app.get('/schedule', (req, res) => {
+app.get('/settings', (req, res) => {
   // Send the HTML file
-  res.sendFile(path.join(__dirname, 'public/schedule.html'));
+  res.sendFile(path.join(__dirname, 'public/settings.html'));
 });
 
 app.get('/weight', (req, res) => {
@@ -39,18 +39,7 @@ app.get('/water', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/hydration.html'));
 });
 
-app.get('/journal', (req, res) => {
-  // Send the HTML file
-  res.sendFile(path.join(__dirname, 'public/journal.html'));
-});
-
-app.get('/settings', (req, res) => {
-  // Send the HTML file
-  res.sendFile(path.join(__dirname, 'public/settings.html'));
-});
-
 // Start the server
 app.listen(port,() => {
   console.log(`Server is running at http://localhost:${port}`);
 });
- 

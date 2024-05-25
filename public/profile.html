@@ -4,15 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kaizen LAN</title>
+    <title>Settings - Kaizen LAN</title>
     <link rel="stylesheet" href="css/index.css">
     <link rel="icon" type="image/x-icon" href="kaizen_icon_outline.png">
-    <!-- Include Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Include Cal Heatmap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cal-heatmap/cal-heatmap.css" />
-    <script src="https://cdn.jsdelivr.net/npm/d3@3"></script>
-    <script src="https://cdn.jsdelivr.net/npm/cal-heatmap/cal-heatmap.js"></script>
 </head>
 
 <body>
@@ -43,30 +37,15 @@
             </a>
         </div>
     </div>
-    <!-- Each container is a "row" for different widgets,
-    where each div with class box represents an individual
-    widget. For each id, we can load the widget with the
-    script. -->
     <div id="main">
         <div class="container">
             <div class="box">
-                
-            </div>
-            <div class="box">
-
-            </div>
-        </div>
-        <div class="container">
-            <div class="box">
-                
-            </div>
-            <div class="box">
-                
+                <div id="profileWidget"></div>  <!-- Where the profile widget will appear -->
             </div>
         </div>
     </div>
     
-    <script type="module" src="js/index.js"></script>
+    <script type="module" src="js/profile.js"></script>
     <footer>Kaizen LAN v1.0.0 • Created by <a href="https://github.com/narlock">narlock</a></footer>
 </body>
 

@@ -1,12 +1,7 @@
-/* styles.css */
-
 body {
     background-color: #484848;
-    /* Grey background color */
     font-family: 'Fira Code', monospace;
-    /* Set Fira Code as the default font */
     color: #9c9c9c;
-    /* Set off-white text color for elements with the class 'off-white-text' */
 }
 
 footer {
@@ -15,12 +10,12 @@ footer {
 }
 
 footer a {
-    text-decoration: none; /* Remove underline */
-    color: inherit; /* Inherit text color from parent */
+    text-decoration: none;
+    color: inherit;
 }
 
 footer a:hover {
-    color: #00a657; /* Change color on hover */
+    color: #00a657;
 }
 
 h2, h3, b {
@@ -44,9 +39,7 @@ button {
 }
 
 p {
-    /* Additional styling for paragraphs if needed */
     font-size: 16px;
-    /* Adjust font size as needed */
 }
 
 .topnav a {
@@ -71,7 +64,6 @@ p {
     font-size: 17px;
 }
 
-/* Add the tooltip styling */
 .tooltip {
     position: absolute;
     background-color: #000;
@@ -84,14 +76,12 @@ p {
     z-index: 1;
 }
 
-/* Position the tooltip above the link */
 .tooltip.top {
     bottom: calc(100% + 5px);
     left: 50%;
     transform: translateX(-50%);
 }
 
-/* Position the tooltip above the right-aligned links */
 .tooltip.right {
     top: 50%;
     left: calc(100% + 5px);
@@ -99,7 +89,7 @@ p {
 }
 
 .menuLink img {
-    transition: filter 0.3s; /* Add transition for smooth effect */
+    transition: filter 0.3s;
 }
 
 .menuLink:hover img {
@@ -115,8 +105,8 @@ p {
 .container {
     display: flex;
     flex-wrap: wrap;
-    width: 100%; /* Set a specific width for consistency */
-    justify-content: space-around; /* Adjust as needed */
+    width: 100%;
+    justify-content: space-around;
 }
 
 .center-container {
@@ -220,16 +210,46 @@ p {
     color: red;
 }
 
+#profileForm {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: medium;
+}
+
+#submitButton {
+    background-color: #00eb7b;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s;
+    text-shadow: 1px 0 0 black, 0 1px 0 black, -1px 0 0 black, 0 -1px 0 black,
+                  2px 2px 4px black;
+}
+
+#submitButton:hover {
+    background-color: #00cc65;
+}
+
 @media only screen and (min-width: 901px) {
-    /* Show the tooltip on hover */
     .topnav a:hover .tooltip {
         visibility: visible;
         opacity: 1;
     }
 
-    /* Customize tooltip content for each link */
     .topnav a[href="/profile"] .tooltip::before {
         content: 'View Profile';
+    }
+
+    .topnav a[href="/habit"] .tooltip::before {
+        content: 'Manage Habits';
     }
 
     .topnav a[href="/lists"] .tooltip::before {
@@ -275,7 +295,7 @@ p {
     }
 
     .box {
-        flex-basis: 100%; /* Set the basis to 100% for stacking */
+        flex-basis: 100%;
         margin: auto;
         margin-top: 20px;
     }
@@ -287,5 +307,13 @@ p {
     #profile img {
         width: 175px;
         height: 175px;
+    }
+
+    #profileForm {
+        font-size: small;
+    }
+
+    span {
+        font-size: small;
     }
 }

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Kaizen LAN</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="icon" type="image/x-icon" href="kaizen_icon_outline.png">
+</head>
+
+<body>
+    <div class="topnav">
+        <a href="/" id="homeLink">
+            <img src="kaizen_icon.png">
+        </a>
+        <div class="topnav-right">
+            <a href="/profile" class="menuLink">
+                <span class="tooltip top"></span>
+                <img src="res/view_profile.png">
+            </a>
+            <a href="/habit" class="menuLink">
+                <span class="tooltip top"></span>
+                <img src="res/manage_habits.png">
+            </a>
+            <a href="/weight" class="menuLink">
+                <span class="tooltip top"></span>
+                <img src="res/manage_weight.png">
+            </a>
+            <a href="/water" class="menuLink">
+                <span class="tooltip top"></span>
+                <img src="res/manage_hydrate.png">
+            </a>
+            <a href="/settings" class="menuLink">
+                <span class="tooltip top"></span>
+                <img src="res/settings.png">
+            </a>
+        </div>
+    </div>
+    <div id="main">
+        <div class="container">
+            <div class="box">
+                <form id="profileForm">
+
+                    <!-- General Section -->
+                    <section>
+                        <h2>General</h2>
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username"><br><br>
+                        
+                        <label for="birthdate">Birth Date:</label>
+                        <input type="date" id="birthdate" name="birthdate"><br><br>
+                
+                        <label>Image:</label>
+                        <img src="res/placeholder.png" width="150px" alt="User Image" id="userImage" onclick="imageClicked()">
+                        <script>
+                            function imageClicked() {
+                                var newUrl = prompt("Enter the new URL for the image:");
+                                if (newUrl) {
+                                    document.getElementById('userImage').src = newUrl;
+                                }
+                            }
+                        </script>
+                    </section>
+                    <hr>
+                    <!-- Health Section -->
+                    <section>
+                        <h2>Health</h2>
+                        <label for="height">Height:</label>
+                        <input type="text" id="height" name="height"><br><br>
+                        
+                        <label for="goalWeight">Goal Weight:</label>
+                        <input type="text" id="goalWeight" name="goalWeight"><br><br>
+                
+                        <label for="goalWater">Goal Water Intake:</label>
+                        <input type="text" id="goalWater" name="goalWater">
+                    </section>
+                    <hr>
+                    <!-- Home Screen Section -->
+                    <section>
+                        <h2>Home Screen</h2>
+                        <label for="numberOfRows">Number of Rows:</label>
+                        <input type="number" id="numberOfRows" name="numberOfRows" min="1" max="10" onchange="updateWidgets()"><br><br>
+                
+                        <div id="widgetContainer"></div>
+                
+                    </section>
+                    <br></br>
+                    <button id="submitButton" type="button">Save Changes</button>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+    
+    <script type="module" src="js/settings.js"></script>
+    <footer>Kaizen LAN v1.0.0 • Created by <a href="https://github.com/narlock">narlock</a></footer>
+</body>
+
+</html>
