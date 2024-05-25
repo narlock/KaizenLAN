@@ -90,6 +90,18 @@ async function updateKaizenProfile(data) {
     return updateResponse.profile;
 }
 
+async function addXpToProfile(profileId, xpToAdd) {
+    const mutation = `
+        mutation {
+            addXpToProfile(id: ${profileId}, xp: ${xpToAdd}) {
+                profile {
+                    xp
+                }
+            }
+        }
+    `;
+    return await KaizenGraphQL.request(mutation);
+}
 
 /**
  * 
@@ -100,4 +112,4 @@ function createKaizenProfileWidget(div, profile) {
     console.log("Hello");
 }
 
-export { getKaizenProfileById, createKaizenProfileWidget, updateKaizenProfile }
+export { getKaizenProfileById, createKaizenProfileWidget, updateKaizenProfile, addXpToProfile }

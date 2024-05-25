@@ -1,4 +1,5 @@
 import * as HabitLoader from '.././lib/graph/habitLoader.js'
+import * as ProfileLoader from '.././lib/graph/profileLoader.js'
 
 /**
  * Returns a div for the specific habit - full year heatmap
@@ -59,6 +60,7 @@ function displayHabitWidgetYear(habitName, entries, streak) {
 
 async function completeHabitForToday(todayAsString, habitName, profileId) {
     await HabitLoader.saveHabitEntry(habitName, profileId, todayAsString);
+    await ProfileLoader.addXpToProfile(profileId, 5);
     window.location.reload(true);
 }
 
