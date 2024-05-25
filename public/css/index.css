@@ -116,6 +116,13 @@ p {
     margin-top: 30px;
 }
 
+.center {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .add-button {
     margin: 20px;
     padding-top: 4px;
@@ -219,7 +226,7 @@ p {
     font-size: medium;
 }
 
-#submitButton {
+#submitButton, #startHabit {
     background-color: #00eb7b;
     color: white;
     border: none;
@@ -234,8 +241,27 @@ p {
                   2px 2px 4px black;
 }
 
-#submitButton:hover {
+#submitButton:hover, #startHabit:hover {
     background-color: #00cc65;
+}
+
+#deleteHabit {
+    background-color: #eb0000;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s;
+    text-shadow: 1px 0 0 black, 0 1px 0 black, -1px 0 0 black, 0 -1px 0 black,
+                  2px 2px 4px black;
+}
+
+#deleteHabit:hover {
+    background-color: #bd0000;
 }
 
 @media only screen and (min-width: 901px) {

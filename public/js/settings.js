@@ -1,4 +1,4 @@
-import * as ProfileUtils from '.././lib/profileLoader.js'
+import * as ProfileUtils from '.././lib/graph/profileLoader.js'
 
 export async function saveChanges() {
     var profile = {

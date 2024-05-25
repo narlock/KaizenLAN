@@ -1,4 +1,4 @@
-const GRAPH_ENDPOINT = "http://localhost:8080/graphql";
+import * as KaizenGraphQL from './kaizenGraphInterface.js'
 
 /**
  * 
@@ -31,24 +31,8 @@ async function getKaizenProfileById(profileId) {
             }
         }
     `;
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ query })
-    };
-    try {
-        const response = await fetch(GRAPH_ENDPOINT, options);
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        var responseBody = await response.json();
-        return responseBody.data.profile
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        alert("An unexpected error occurred retrieivng profile information - are the APIs running?")
-    }
+    const getResponse = await KaizenGraphQL.request(query);
+    return getResponse.profile;
 }
 
 async function updateKaizenProfile(data) {
@@ -102,25 +86,8 @@ async function updateKaizenProfile(data) {
             }
         }
     `;
-    console.log(mutation);
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ query: mutation })
-    };
-    try {
-        const response = await fetch(GRAPH_ENDPOINT, options);
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        var responseBody = await response.json();
-        return responseBody.data.profile
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        alert("An unexpected error occurred retrieivng profile information - are the APIs running?")
-    }
+    const updateResponse = await KaizenGraphQL.request(mutation);
+    return updateResponse.profile;
 }
 
 

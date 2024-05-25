@@ -1,4 +1,4 @@
-import * as ProfileUtils from '.././lib/profileLoader.js'
+import * as ProfileUtils from '.././lib/graph/profileLoader.js'
 import * as ProfileWidget from '.././lib/profileWidget.js'
 
 var PROFILE;
