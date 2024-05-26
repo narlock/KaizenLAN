@@ -1,5 +1,7 @@
 import * as ProfileUtils from '../lib/graph/profileLoader.js'
 import * as ProfileWidget from '.././lib/profileWidget.js'
+import * as HabitLoader from '.././lib/graph/habitLoader.js'
+import * as HabitWidget from '.././lib/habitWidget.js'
 
 var PROFILE;
 
@@ -34,11 +36,11 @@ function readProfileDataAndConfigureWidgets() {
             // Split the widgets string into an array of widget names
             const widgets = rowInfo.widgets.split(',');
             // Create a box for each widget
-            widgets.forEach(widgetName => {
+            widgets.forEach(async widgetName => {
                 const box = document.createElement('div');
                 box.className = 'box';
                 // Add an h2 element with the widget's name inside the box
-                populateWidgetData(box, widgetName);
+                await populateWidgetData(box, widgetName);
                 // Append the box to the container
                 container.appendChild(box);
             });
@@ -49,7 +51,7 @@ function readProfileDataAndConfigureWidgets() {
     }
 }
 
-function populateWidgetData(boxElement, widgetName) {
+async function populateWidgetData(boxElement, widgetName) {
     // Depending on the widgetName, populate data accordingly
     switch(widgetName) {
         case 'profile':
@@ -88,9 +90,20 @@ function populateWidgetData(boxElement, widgetName) {
             // Add widget to box and display
             break;
         default:
-            const defaultHeader = document.createElement('h2');
-            defaultHeader.textContent = `Widget: ${widgetName}`;
-            boxElement.appendChild(defaultHeader);
-            // Add widget to box and display
+            // Check for habit widget
+            if(widgetName.startsWith("habit")) {
+                var habitName = capitalizeFirstLetter(widgetName.substring(5));
+                var info = await HabitLoader.getHabitInformation(habitName, 1);
+                HabitWidget.displayMonthViewWidget(boxElement, habitName, info.entries, info.streak);
+            } else {
+                const defaultHeader = document.createElement('h2');
+                defaultHeader.textContent = `Widget: ${widgetName}`;
+                boxElement.appendChild(defaultHeader);
+            }
     }
+}
+
+function capitalizeFirstLetter(string) {
+    if (string.length === 0) return string; // Handle empty string
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }

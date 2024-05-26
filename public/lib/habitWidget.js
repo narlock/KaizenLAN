@@ -18,7 +18,12 @@ function displayHabitWidgetYear(habitName, entries, streak) {
     habitDiv.appendChild(habitHeader);
     // If an entry for the habit does not exist today, let's create the interface
 
-    var todayAsString = new Date().toISOString().split('T')[0];
+    var today = new Date();
+    var year = today.getFullYear();
+    var month = (today.getMonth() + 1).toString().padStart(2, '0');
+    var day = today.getDate().toString().padStart(2, '0');
+    var todayAsString = `${year}-${month}-${day}`;
+    
     if(!entries.includes(todayAsString)) {
         // Create span
         const completeInterface = document.createElement('p');
@@ -73,8 +78,12 @@ function showCalHeatmap(habitName, entries) {
     var endOfYear = new Date(now.getFullYear() + 1, 0, 0);
 
     // Prepare the given entries as a set for quick lookup
-    var entrySet = new Set(entries.map(dateStr => new Date(dateStr).setHours(0,0,0,0)));
-
+    var entrySet = new Set(entries.map(dateStr => {
+        var date = new Date(dateStr);
+        date.setDate(date.getDate() + 1); // Add one day to each entry since cal map weird
+        return date.setHours(0, 0, 0, 0);
+    }));
+    
     // Generate data based on the provided entries list
     var calData = {};
     for (var d = new Date(startOfYear); d <= endOfYear; d.setDate(d.getDate() + 1)) {
@@ -121,15 +130,18 @@ function showCalHeatmapWidget(habitName, entries) {
 
 
     // Prepare the given entries as a set for quick lookup
-    var entrySet = new Set(entries.map(dateStr => new Date(dateStr).setHours(0,0,0,0)));
+    var entrySet = new Set(entries.map(dateStr => {
+        var date = new Date(dateStr);
+        date.setDate(date.getDate() + 1); // Add one day to each entry since cal map weird
+        return date.setHours(0, 0, 0, 0);
+    }));
 
     // Generate data based on the provided entries list
     var calData = {};
     for (var d = new Date(startOfMonth); d <= endOfMonth; d.setDate(d.getDate() + 1)) {
         var timestamp = Math.floor(d.getTime() / 1000); // convert to seconds
-        var dayStart = new Date(d).setHours(0,0,0,0); // Normalize to start of the day to match entries
+        var dayStart = new Date(d).setHours(0, 0, 0, 0); // Normalize to start of the day to match entries
         calData[timestamp] = entrySet.has(dayStart) ? 1 : 0;
-        // console.log("Date: " + d.toDateString() + ", Count: " + calData[timestamp]);
     }
 
     cal.init({
@@ -181,7 +193,11 @@ function displayYearView(habitName, entries, streak) {
 
     // Add cal heatmap after this has been completed
     setTimeout(() => {
-        showCalHeatmap(habitName, entries);
+        if(window.innerWidth <= 700) {
+            showCalHeatmapWidget(habitName, entries);
+        } else {
+            showCalHeatmap(habitName, entries);
+        }
     }, 0);
 }
 
@@ -210,4 +226,22 @@ function displayMonthView(habitName, entries, streak) {
     }, 0);
 }
 
-export { displayYearView, displayMonthView }
+function displayMonthViewWidget(element, habitName, entries, streak) {
+    // Add content to habit box
+    const habitDiv = displayHabitWidgetYear(habitName, entries, streak);
+    element.appendChild(habitDiv);
+
+    // Add cal heatmap after this has been completed
+    setTimeout(() => {
+        showCalHeatmapWidget(habitName, entries);
+    }, 0);
+}
+
+export { displayYearView, displayMonthView, displayMonthViewWidget }
+
+function formatDateToString(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}

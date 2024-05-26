@@ -1,4 +1,5 @@
-import * as ProfileUtils from '.././lib/graph/profileLoader.js'
+import * as ProfileUtils from '.././lib/graph/profileLoader.js';
+import * as HabitLoader from '.././lib/graph/habitLoader.js';
 
 export async function saveChanges() {
     var profile = {
@@ -23,7 +24,7 @@ export async function saveChanges() {
     var rows = document.querySelectorAll('#widgetContainer .widget-row');
     rows.forEach((row, index) => {
         var widgets = Array.from(row.querySelectorAll('select')).map(select => select.value).join(',');
-        rowInfoList.push({profileId: 1, rowIndex: index + 1, widgets: widgets });
+        rowInfoList.push({ profileId: 1, rowIndex: index + 1, widgets: widgets });
     });
 
     var data = {
@@ -34,14 +35,15 @@ export async function saveChanges() {
 
     console.log('Changes saved!', JSON.stringify(data, null, 2));
     PROFILE = await ProfileUtils.updateKaizenProfile(data);
+    window.location.reload(true);
 }
 
-export function populateForm(data) {
+export async function populateForm(data) {
     document.getElementById('username').value = data.profile.username;
     document.getElementById('birthdate').value = data.profile.birthDate;
     document.getElementById('userImage').src = data.profile.imageUrl == null ? "res/placeholder.png" : data.profile.imageUrl; // Sets the placeholder if no image
     document.getElementById('numberOfRows').value = data.profile.numRows;
-    updateWidgets();
+    await updateWidgets();
 
     document.getElementById('height').value = data.health.height;
     document.getElementById('goalWeight').value = data.health.goalWeight;
@@ -60,39 +62,52 @@ export function populateForm(data) {
             try {
                 rowDiv.querySelectorAll('select')[widgetIndex].value = widget;
             } catch (error) {
-                console.warn("Expected warning occurred when trying to dynamically populate number of rows. "
-                + "There are entries that exist in the database for rows that are not being shown. "
-                + "If you don't want to see this, match the numRows field with rowInfoList size.");
+                console.warn("Expected warning occurred when trying to dynamically populate number of rows. " +
+                    "There are entries that exist in the database for rows that are not being shown. " +
+                    "If you don't want to see this, match the numRows field with rowInfoList size.");
             }
         });
     });
 }
 
-window.updateWidgets = function () {
+window.updateWidgets = async function () {
+    const habitNameResponse = await HabitLoader.getHabitNames(1);
+    var HABIT_NAMES = habitNameResponse.map(item => "Habit" + item.name);
+
+    var options = ["Profile", "Weight", "Water"];
+    HABIT_NAMES.forEach(e => {
+        options.push(e);
+    });
+
     var container = document.getElementById('widgetContainer');
     container.innerHTML = '';
     var numberOfRows = document.getElementById('numberOfRows').value;
     for (let i = 0; i < numberOfRows; i++) {
         let rowDiv = document.createElement('div');
         rowDiv.className = 'widget-row';
+        
+        let select = document.createElement('select');
+        select.name = `widget${i}`;
+        options.forEach(optionText => {
+            let option = document.createElement('option');
+            option.value = optionText.toLowerCase();
+            option.innerText = optionText;
+            select.appendChild(option);
+        });
+
         rowDiv.innerHTML = `
             <button type="button" onclick="addWidget(this)">+</button>
             <button type="button" onclick="removeWidget(this)">-</button>
-            <select name="widget${i}">
-                <option value="profile">Profile</option>
-                <option value="weight">Weight</option>
-                <option value="water">Water</option>
-                <option value="habit">Habit</option>
-            </select>
         `;
+        rowDiv.appendChild(select);
         container.appendChild(rowDiv);
     }
 }
 
 window.addWidget = function(button) {
     let parent = button.parentNode;
-    let newSelect = parent.querySelector('select').cloneNode(true);
-    parent.appendChild(newSelect);
+    let select = parent.querySelector('select').cloneNode(true);
+    parent.appendChild(select);
 }
 
 window.removeWidget = function(button) {
@@ -108,9 +123,10 @@ window.removeWidget = function(button) {
 
 var PROFILE;
 
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById("submitButton").onclick=saveChanges;
-    populateFormFromProfile();
+document.addEventListener('DOMContentLoaded', async () => {
+    document.getElementById("submitButton").onclick = saveChanges;
+
+    await populateFormFromProfile();
 });
 
 async function populateFormFromProfile() {

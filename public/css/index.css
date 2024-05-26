@@ -227,7 +227,7 @@ p {
 }
 
 #submitButton, #startHabit {
-    background-color: #00eb7b;
+    background-color: #00a657;
     color: white;
     border: none;
     border-radius: 20px;
@@ -237,12 +237,10 @@ p {
     cursor: pointer;
     outline: none;
     transition: background-color 0.3s;
-    text-shadow: 1px 0 0 black, 0 1px 0 black, -1px 0 0 black, 0 -1px 0 black,
-                  2px 2px 4px black;
 }
 
 #submitButton:hover, #startHabit:hover {
-    background-color: #00cc65;
+    background-color: #007c3e;
 }
 
 #deleteHabit {
@@ -256,12 +254,10 @@ p {
     cursor: pointer;
     outline: none;
     transition: background-color 0.3s;
-    text-shadow: 1px 0 0 black, 0 1px 0 black, -1px 0 0 black, 0 -1px 0 black,
-                  2px 2px 4px black;
 }
 
 #deleteHabit:hover {
-    background-color: #bd0000;
+    background-color: #950000;
 }
 
 @media only screen and (min-width: 901px) {
