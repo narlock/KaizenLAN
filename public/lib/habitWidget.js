@@ -12,9 +12,12 @@ function displayHabitWidgetYear(habitName, entries, streak) {
     habitDiv.id = `${habitName}Div`;
     habitDiv.className = 'center';
 
+    // Get streak text
+    var streakText = streak != 0 ? ` 🔥${streak}` : '';
+
     // Create and add habit header with name
     const habitHeader = document.createElement('h2');
-    habitHeader.textContent = habitName;
+    habitHeader.textContent = habitName + streakText;
     habitDiv.appendChild(habitHeader);
     // If an entry for the habit does not exist today, let's create the interface
 
@@ -52,13 +55,6 @@ function displayHabitWidgetYear(habitName, entries, streak) {
     const habitCalMapDiv = document.createElement('div');
     habitCalMapDiv.id = `${habitName}cal-heatmap`;
     habitDiv.appendChild(habitCalMapDiv);
-
-    // Add streak information
-    if(streak != 0) {
-        const streakElement = document.createElement('h3');
-        streakElement.textContent = '🔥 Current Streak: ' + streak;
-        habitDiv.appendChild(streakElement);
-    }
     
     return habitDiv;
 }
@@ -83,7 +79,7 @@ function showCalHeatmap(habitName, entries) {
         date.setDate(date.getDate() + 1); // Add one day to each entry since cal map weird
         return date.setHours(0, 0, 0, 0);
     }));
-    
+
     // Generate data based on the provided entries list
     var calData = {};
     for (var d = new Date(startOfYear); d <= endOfYear; d.setDate(d.getDate() + 1)) {
