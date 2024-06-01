@@ -1,8 +1,10 @@
 import * as WeightLoader from '../lib/graph/weightTrackLoader.js';
 import * as Utils from '../lib/utils/utils.js';
+import * as ProfileUtils from '../lib/graph/profileLoader.js'
 
 async function handleCreateWeightClick(date, amount) {
     await WeightLoader.createWeightEntry(1, date, amount);
+    await ProfileUtils.addXpToProfile(1, 5);
 }
 
 // Creates div with widget information
