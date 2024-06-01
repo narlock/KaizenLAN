@@ -36,7 +36,7 @@ app.get('/weight', (req, res) => {
 
 app.get('/water', (req, res) => {
   // Send the HTML file
-  res.sendFile(path.join(__dirname, 'public/hydration.html'));
+  res.sendFile(path.join(__dirname, 'public/water.html'));
 });
 
 // Start the server
