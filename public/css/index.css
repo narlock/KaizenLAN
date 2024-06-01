@@ -217,7 +217,7 @@ p {
     color: red;
 }
 
-#profileForm {
+#profileForm, #weightEntryBox, #weightStatsBox, #weightBoxInterfaceDiv {
     width: 100%;
     display: flex;
     flex-direction: column;

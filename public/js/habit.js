@@ -1,5 +1,5 @@
-import * as HabitWidget from '.././lib/habitWidget.js'
-import * as HabitLoader from '.././lib/graph/habitLoader.js'
+import * as HabitWidget from '../lib/habitWidget.js'
+import * as HabitLoader from '../lib/graph/habitLoader.js'
 
 var HABIT_NAMES;
 

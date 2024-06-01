@@ -9,10 +9,6 @@
     <link rel="icon" type="image/x-icon" href="kaizen_icon_outline.png">
     <!-- Include Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Include Cal Heatmap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cal-heatmap/cal-heatmap.css" />
-    <script src="https://cdn.jsdelivr.net/npm/d3@3"></script>
-    <script src="https://cdn.jsdelivr.net/npm/cal-heatmap/cal-heatmap.js"></script>
 </head>
 
 <body>
@@ -49,21 +45,12 @@
     script. -->
     <div id="main">
         <div class="container">
-            <div class="box">
-                
-            </div>
-            <div class="box">
-                
-            </div>
+            <div class="box" id="weightEntryBox"></div>
+            <div class="box" id="weightStatsBox"></div>
         </div>
         <div class="container">
-            <div class="box">
-                
-            </div>
-        </div>
-        <div class="container">
-            <div class="box">
-                
+            <div class="box" id="weightGraphBox">
+                <canvas id="weightChart" style="width:100%;max-height:400px"></canvas>
             </div>
         </div>
     </div>
@@ -71,5 +58,4 @@
     <script type="module" src="js/weight.js"></script>
     <footer>Kaizen LAN v1.0.0 • Created by <a href="https://github.com/narlock">narlock</a></footer>
 </body>
-
 </html>

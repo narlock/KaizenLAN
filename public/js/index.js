@@ -2,6 +2,8 @@ import * as ProfileUtils from '../lib/graph/profileLoader.js'
 import * as ProfileWidget from '.././lib/profileWidget.js'
 import * as HabitLoader from '.././lib/graph/habitLoader.js'
 import * as HabitWidget from '.././lib/habitWidget.js'
+import * as WeightLoader from '.././lib/graph/weightTrackLoader.js'
+import * as WeightWidget from '.././lib/weightWidget.js'
 
 var PROFILE;
 
@@ -76,11 +78,14 @@ async function populateWidgetData(boxElement, widgetName) {
             // Add widget to box and display
             break;
         case 'weight':
-            // Add header to box
-            const weightHeader = document.createElement('h2');
-            weightHeader.textContent = 'Weight Management';
-            boxElement.appendChild(weightHeader);
-            // Add widget to box and display
+            const WEIGHT_ENTRIES = await WeightLoader.getWeightEntriesById(1);
+            var weightWidget = await WeightWidget.createWidgetInterface(WEIGHT_ENTRIES);
+            boxElement.appendChild(weightWidget);
+
+            setTimeout(async () => {
+                await WeightWidget.displayWeightChart();
+            }, 0);
+
             break;
         case 'water':
             // Add header to box

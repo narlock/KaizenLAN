@@ -1,5 +1,6 @@
 import * as HabitLoader from '.././lib/graph/habitLoader.js'
 import * as ProfileLoader from '.././lib/graph/profileLoader.js'
+import * as Utils from '../lib/utils/utils.js'
 
 /**
  * Returns a div for the specific habit - full year heatmap
@@ -19,13 +20,9 @@ function displayHabitWidgetYear(habitName, entries, streak) {
     const habitHeader = document.createElement('h2');
     habitHeader.textContent = habitName + streakText;
     habitDiv.appendChild(habitHeader);
+    
     // If an entry for the habit does not exist today, let's create the interface
-
-    var today = new Date();
-    var year = today.getFullYear();
-    var month = (today.getMonth() + 1).toString().padStart(2, '0');
-    var day = today.getDate().toString().padStart(2, '0');
-    var todayAsString = `${year}-${month}-${day}`;
+    var todayAsString = Utils.todayAsString();
     
     if(!entries.includes(todayAsString)) {
         // Create span
