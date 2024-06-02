@@ -1,9 +1,10 @@
-import * as ProfileUtils from '../lib/graph/profileLoader.js'
-import * as ProfileWidget from '.././lib/profileWidget.js'
-import * as HabitLoader from '.././lib/graph/habitLoader.js'
-import * as HabitWidget from '.././lib/habitWidget.js'
-import * as WeightLoader from '.././lib/graph/weightTrackLoader.js'
-import * as WeightWidget from '.././lib/weightWidget.js'
+import * as ProfileUtils from '../lib/graph/profileLoader.js';
+import * as ProfileWidget from '.././lib/profileWidget.js';
+import * as HabitLoader from '.././lib/graph/habitLoader.js';
+import * as HabitWidget from '.././lib/habitWidget.js';
+import * as WeightLoader from '.././lib/graph/weightTrackLoader.js';
+import * as WeightWidget from '.././lib/weightWidget.js';
+import * as WaterWidget from '../lib/waterWidget.js';
 
 var PROFILE;
 
@@ -89,10 +90,9 @@ async function populateWidgetData(boxElement, widgetName) {
             break;
         case 'water':
             // Add header to box
-            const waterHeader = document.createElement('h2');
-            waterHeader.textContent = 'Water Management';
-            boxElement.appendChild(waterHeader);
-            // Add widget to box and display
+            var waterWidget = await WaterWidget.createWaterInterface();
+            console.log(waterWidget);
+            boxElement.appendChild(waterWidget);
             break;
         default:
             // Check for habit widget
