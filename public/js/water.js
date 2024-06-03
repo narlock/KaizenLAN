@@ -69,5 +69,51 @@ function displayWaterEntryToday(amount) {
 }
 
 async function createWaterHeatmap() {
+    console.log('Inside of createWaterHeatmap - water-heatmap is the div id');
+    var cal = new CalHeatMap();
+    var now = new Date();
+    var startOfYear = new Date(now.getFullYear(), 0, 1);
+    var endOfYear = new Date(now.getFullYear() + 1, 0, 0);
 
+    // Prepare the given entries as a map for quick lookup
+    var entryMap = new Map(WATER_ENTRIES.map(entry => {
+        var date = new Date(entry.entryDate);
+        date.setDate(date.getDate() + 1); // Add one day to each entry since cal map is weird
+        return [date.setHours(0, 0, 0, 0), entry.entryAmount];
+    }));
+    console.log(entryMap);
+
+    // Generate data based on the provided entries list
+    var calData = {};
+    for (var d = new Date(startOfYear); d <= endOfYear; d.setDate(d.getDate() + 1)) {
+        var timestamp = Math.floor(d.getTime() / 1000); // convert to seconds
+        var dayStart = new Date(d).setHours(0, 0, 0, 0); // Normalize to start of the day to match entries
+        var entryAmount = entryMap.has(dayStart) ? entryMap.get(dayStart) : 0;
+        calData[timestamp] = entryAmount;
+    }
+
+    cal.init({
+        itemSelector: `#water-heatmap`,
+        domain: "year",
+        subDomain: "day",
+        data: calData,
+        start: startOfYear,  // Start from the beginning of the current year
+        cellSize: 10,
+        range: 1,  // Set range to cover all months of the year
+        domainGutter: 10,
+        legend: [0, 10, 30, 50, 70, 90, 110, 130, 150 ],  // Adjust this based on your data's max count
+        tooltip: true,
+        legendColors: {
+            empty: "#e3e3e3",
+            min: "#004461",
+            max: "#00b3ff"
+        },
+        legendHorizontalPosition: "left",
+        subDomainTextFormat: "",  // No text inside the cells
+        domainLabelFormat: "%Y", // %Y-%m
+        subDomainTitleFormat: {
+            empty: "No data on {date}",
+            filled: "{date} -- {count} water"
+        }
+    });
 }

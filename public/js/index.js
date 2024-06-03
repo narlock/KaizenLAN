@@ -71,13 +71,6 @@ async function populateWidgetData(boxElement, widgetName) {
                 ProfileWidget.moveXpBarWithElement(xpBar, PROFILE.profile.xp, boxElement);
             }, 0);
             break;
-        case 'habit':
-            // Add header to box
-            const habitHeader = document.createElement('h2');
-            habitHeader.textContent = 'Habit Tracker';
-            boxElement.appendChild(habitHeader);
-            // Add widget to box and display
-            break;
         case 'weight':
             const WEIGHT_ENTRIES = await WeightLoader.getWeightEntriesById(1);
             var weightWidget = await WeightWidget.createWidgetInterface(WEIGHT_ENTRIES);

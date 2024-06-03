@@ -217,13 +217,18 @@ p {
     color: red;
 }
 
-#profileForm, #weightEntryBox, #weightStatsBox, #weightBoxInterfaceDiv, #waterBox {
+#profileForm, #weightEntryBox, #weightStatsBox, #weightBoxInterfaceDiv, #waterBox, #weightGraphBox {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     font-size: medium;
+}
+
+.entryWaterSpan {
+    padding-bottom: 20px;
+    margin: 20px;
 }
 
 #submitButton, #startHabit {

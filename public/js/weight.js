@@ -93,9 +93,10 @@ function displayWeightEntryToday(todaysWeightString) {
 }
 
 async function initializeWeightStatsBox() {
+    var interfaceDiv = document.getElementById('weightStatsBox');
 
     if(ENTERED_TODAY) {
-        var interfaceDiv = document.getElementById('weightStatsBox');
+        
 
         // Body mass index
         console.log(TODAY_WEIGHT_AMOUNT);
