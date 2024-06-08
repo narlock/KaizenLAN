@@ -1,8 +1,5 @@
 # Kaizen LAN
 
-> [!NOTE]  
-> This README is currently a **plan** for Kaizen LAN. There are no current releases at this time and the first version is in development.
-
 ### Frontend
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
@@ -23,17 +20,21 @@
 **Kaizen LAN**: Continuously improve your life with helpful widgets - accessible around your home! 
 
 This application offers a interface that contains many different self improvement tools. The goal is to provide the user a customized experience to help continuously improve their lives through the use of small and simple tools. The following tools are planned to be included in Kaizen LAN:
-- **Kaizen profile** (planned for v1.0.0)
-- **Weight tracking** (planned for v1.0.0)
-- **Water/hydration tracking** (planned for v1.0.0)
-- **Habit tracking** (planned for v1.0.0)
+
+### Currently Implemented
+- **Kaizen profile** (v1.0.0)
+- **Weight tracking** (v1.0.0)
+- **Water/hydration tracking** (v1.0.0)
+- **Habit tracking** (v1.0.0)
+
+### Planned to be Implemented
 - **Routine checklists** (planned for v1.1.0)
 - **Text/CSV editor** (planned for v1.1.0)
 - **Time blocking** (planned for v1.1.0)
 - **Journal** (planned for v1.1.0)
 - **Food calorie tracking** (planned for v1.2.0)
 - **Todo list** (planned for v1.2.0)
-  **Countdown workout** (planned for v1.2.0)
+- **Countdown workout** (planned for v1.2.0)
 
 # Concept View
 
@@ -51,12 +52,11 @@ This application offers a interface that contains many different self improvemen
 
 To utilize all of the features of Kaizen LAN, you will need to designate a computer system to run each part of the Kaizen LAN application. This includes the Kaizen LAN server, Kaizen GraphQL API, each microservice, and a MySQL database. To be able to run all of these, you must have the following:
 - **[Node.js](https://nodejs.org/en) version 18 or higher** (used to run Kaizen LAN server and Kaizen Profile API)
-- **[Java](https://openjdk.org/projects/jdk/) version 17 or higher** and **Maven version 3 or higher** (used to build and run each microservice)
+- **[Java](https://openjdk.org/projects/jdk/) version 17 or higher** (used to build and run each API microservice)
 - **[MySQL](https://www.mysql.com/) version 8 or higher** (used to run the MySQL database)
 - **Bash or related terminal interface**
     - macOS testing using [Zsh](https://en.wikipedia.org/wiki/Z_shell) (preinstalled on macOS)
     - Linux (Ubuntu) testing using [GNOME](https://en.wikipedia.org/wiki/GNOME_Terminal) (preinstalled on Ubuntu 22)
-    - Windows testing using [Git Bash](https://git-scm.com/downloads) (NOT preinstalled)
 
 ## Dependencies
 
@@ -82,34 +82,43 @@ You can download the latest release of the application from the **[releases page
 
 ### Initial Setup
 
-For initial setup, you must have your MySQL instance running on your machine. Open the `setup.sh` file to configure with your MySQL credentials:
+For initial setup, you must have your MySQL instance running on your machine. Verify that you can open MySQL through the terminal by using the command and signing in with your MySQL password:
 ```bash
-#!/bin/bash
-
-# MySQL credentials
-MYSQL_USER="your_mysql_username"
-MYSQL_PASSWORD="your_mysql_password"
-MYSQL_HOST="localhost"
-MYSQL_DB="your_database_name"
+mysql -u {your_mysql_username} -p
 ```
-Specifically, you will need to modify the `MYSQL_USER`, `MYSQL_PASSWORD`, and `MYSQL_DB` values. Kaizen LAN was designed to run on the local machine, so there is no need to modify the host value.
 
-Running this script will create and configure the MySQL database along with each table utilized in this application. If the setup was successful, you will see a message that reads "`SUCCESS: Kaizen LAN setup complete`". If the setup was unsuccessful, you will see a message that reads "`FAILURE: Setup was unable to complete`".
+If you are able to login with a username and password like this, you are ready to move forward with installing Kaizen. This README does not serve the purpose of showing users how to install MySQL on their device.
+
+Run the `setup.sh` script in a bash-supported terminal. 
+- You will be prompted to sign into your MySQL using the script. This script will create all of the tables used in KaizenLAN. It will also create a **secrets** folder which stores the MySQL credentials and LAN address in the user's `Documents/narlock/secrets/mysql.properties` file. The APIs that KaizenLAN utilizes will read from this properties file so that it can communicate with the MySQL database.
+- Next, you will setup your profile. The script will prompt you to create a Kaizen username and enter various information for your profile. After this is completed, a row in the Profile and Health tables for the Kaizen Profile will be added to the MySQL database and the setup will be completed.
+
+> [!NOTE]  
+> If you are interested in viewing the contents of the bash script, you can open the script in a text editor, or view it online on [GitHub](https://github.com/narlock/KaizenLAN/blob/main/setup.sh)
+
 
 ### Run the application
-
-<!-- ** TODO - add information regarding LAN setup ** -->
 
 Once the setup is complete, you can run the `start.sh` script in a new terminal. This will launch the Kaizen LAN server, Kaizen GraphQL API, and each microservice utilized by this application.
 
 > [!WARNING]  
-> By running this application, you are running roughly 10+ applications on your system. RAM usage may vary.
+> By running this application, you are running roughly 6 applications on your system. RAM usage may vary.
 
-Once the script completes, you can choose to exit the terminal if you wish. Next, you can navigate to **http://localhost:3000/** to access Kaizen LAN.
+When you run the application, you will receive the messages indicating which applications are running on which port number:
+```sh
+Starting Kaizen Profile API{} on port 8079
+Starting Narlock Habit API{} on port 8089
+Starting Narlock Water Track API{} on port 8083
+Starting Narlock Weight Track API{} on port 8081
+Starting Narlock GraphQL API{} on port 8080
+Starting Kaizen LAN{} on port 3000
+```
+
+Once the script completes, you can choose to exit the terminal if you wish. Next, you can navigate to **http://localhost:3000/** to access Kaizen LAN. On other devices within your local network, you can navigate to your LAN **http://{lan_address}:3000/** on any of the devices connected to your network to use the application. You can find the exact address in the secrets properties folder that was created during the setup if you cannot find this address.
 
 ### Stopping the application
 
-When the start script is ran, it will run all of the required applications for Kaizen LAN in the background. The stop script will end each process that was opened by the start script. Simply just run the `stop.sh` script in a terminal.
+When the start script is ran, it will run all of the required applications for Kaizen LAN in the background. The stop script will end each process that was opened by the start script. Simply just run the `stop.sh` script in a terminal. This will kill each process that is running on the ports above.
 
 # Concept Idea
 
@@ -119,9 +128,7 @@ Based off of [Kaizen](https://github.com/narlock/Kaizen), which is a local Java 
 
 ![First Iteration](./readme%20assets/Interface.png)
 
-The first iteration of Kaizen LAN introduces a simple interface utilizing the checklist api, water tracking api, profile api, and weight tracking api. The navigation bar at the top of the screen expands on each of the widgets that appear on the home screen.
+The first iteration of Kaizen LAN introduces a simple interface utilizing the habit api, water tracking api, profile api, and weight tracking api. The navigation bar at the top of the screen expands on each of the widgets that appear on the home screen.
 
 # Future Enhancements
-- Multiprofile: require users to "login" to their profile. This allows multiple users to have a profile to utilize Kaizen LAN.
-    - This includes the functionality of providing a password (or not) to sign in to a profile.
-- Anti Habit API integration
+- Multiprofile: require users to "login" to their profile. This allows multiple users to have a profile to utilize Kaizen LAN. This includes the functionality of providing a password (or not) to sign in to a profile.
