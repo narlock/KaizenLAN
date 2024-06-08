@@ -1,4 +1,4 @@
-const GRAPH_ENDPOINT = "http://192.168.0.35:8080/graphql";
+const GRAPH_ENDPOINT = "http://localhost:8080/graphql";
 
 async function request(query) {
     const options = {
