@@ -26,6 +26,10 @@ nohup java -jar narlock-water-track-api.jar &
 echo -e "${MAG}Starting ${GRE}Narlock Weight Track API{$MAG} on port 8081${NC}"
 nohup java -jar narlock-weight-track-api.jar &
 
+# Start Narlock Weight Track API
+echo -e "${MAG}Starting ${GRE}Narlock Checklist Track API{$MAG} on port 8085${NC}"
+nohup java -jar narlock-checklist-api.jar &
+
 # Start Kaizen GraphQL API
 echo -e "${MAG}Starting ${GRE}Narlock GraphQL API{$MAG} on port 8080${NC}"
 nohup java -jar kaizen-graphql-api.jar &
