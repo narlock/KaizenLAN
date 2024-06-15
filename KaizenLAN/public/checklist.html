@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings - Kaizen LAN</title>
+    <title>Checklist - Kaizen LAN</title>
     <link rel="stylesheet" href="css/index.css">
     <link rel="icon" type="image/x-icon" href="kaizen_icon_outline.png">
 </head>
@@ -41,15 +41,17 @@
             </a>
         </div>
     </div>
-    <div id="main">
-        <div class="container">
-            <div class="box">
-                <div id="profileWidget"></div>  <!-- Where the profile widget will appear -->
+    <div id="main"></div>
+    <div class="container">
+        <div id="options" class="center-container">
+            <div class="boxNoBorder">
+                <button id="createChecklist" type="button">Create Checklist</button>
+                <button id="deleteChecklist">Delete Checklist</button>
             </div>
         </div>
     </div>
     
-    <script type="module" src="js/profile.js"></script>
+    <script type="module" src="js/checklist.js"></script>
     <footer>Kaizen LAN v1.0.0 • Created by <a href="https://github.com/narlock">narlock</a></footer>
 </body>
 

@@ -231,7 +231,7 @@ p {
     margin: 20px;
 }
 
-#submitButton, #startHabit {
+#submitButton, #startHabit, #createChecklist {
     background-color: #00a657;
     color: white;
     border: none;
@@ -244,11 +244,11 @@ p {
     transition: background-color 0.3s;
 }
 
-#submitButton:hover, #startHabit:hover {
+#submitButton:hover, #startHabit:hover, #createChecklist:hover {
     background-color: #007c3e;
 }
 
-#deleteHabit {
+#deleteHabit, #deleteChecklist {
     background-color: #eb0000;
     color: white;
     border: none;
@@ -261,7 +261,7 @@ p {
     transition: background-color 0.3s;
 }
 
-#deleteHabit:hover {
+#deleteHabit:hover, #deleteChecklist:hover {
     background-color: #950000;
 }
 
@@ -279,8 +279,8 @@ p {
         content: 'Manage Habits';
     }
 
-    .topnav a[href="/lists"] .tooltip::before {
-        content: 'Manage Lists';
+    .topnav a[href="/checklist"] .tooltip::before {
+        content: 'Manage Checklists';
     }
 
     .topnav a[href="/schedule"] .tooltip::before {

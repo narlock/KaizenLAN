@@ -42,4 +42,16 @@ function getBmiString(bmi) {
     }
 }
 
-export { todayAsString, getDaysAgoDateString, isDateInList, calculateBMI, getBmiString }
+function areDatesEqual(date1, date2) {
+    console.log(date1);
+    console.log(date2);
+    if(date1 == null || date2 == null) {
+        return false;
+    }
+
+    return date1.getFullYear() === date2.getFullYear() &&
+           date1.getMonth() === date2.getMonth() &&
+           date1.getDate() === date2.getDate();
+}
+
+export { todayAsString, getDaysAgoDateString, isDateInList, calculateBMI, getBmiString, areDatesEqual }

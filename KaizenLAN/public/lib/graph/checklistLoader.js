@@ -16,7 +16,7 @@ async function createChecklist(name) {
 async function deleteChecklist(name) {
     const mutation = `
         mutation {
-            deleteChecklist(profileId: 1, name: ${name})
+            deleteChecklist(profileId: 1, name: "${name}")
         }
     `;
     const deleteChecklistResponse = await KaizenGraphQL.request(mutation);
@@ -28,6 +28,11 @@ async function getChecklists() {
         query {
             checklists(profileId: 1) {
                 name
+                items {
+                    id
+                    name
+                    lastCompletedDate
+                }
             }
         }
     `;
@@ -70,24 +75,17 @@ async function completeChecklistItem(id, checklistName) {
         }
     `;
     const completeChecklistItemResponse = KaizenGraphQL.request(mutation);
-    return completeChecklistItemResponse.completeChecklistItem;
+    return completeChecklistItemResponse;
 }
 
-async function getChecklistItems(checklistName) {
-    const query = `
-        query {
-            checklistItems(checklistName: "${checklistName}", profileId: 1) {
-                id
-                checklistName
-                profileId
-                name
-                description
-                lastCompletedDate
-                excludeDays
-                streak
-            }
+async function deleteChecklistItem(id) {
+    const mutation = `
+        mutation {
+            deleteChecklistItem(id: ${id})
         }
     `;
-    const getChecklistItemsResponse = KaizenGraphQL.request(query);
-    return getChecklistItemsResponse.checklistItems;
+    const deleteChecklistItemResponse = KaizenGraphQL.request(mutation);
+    return deleteChecklistItemResponse;
 }
+
+export { createChecklist, deleteChecklist, getChecklists, createChecklistItem, completeChecklistItem, deleteChecklistItem }

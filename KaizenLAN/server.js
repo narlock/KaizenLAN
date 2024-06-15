@@ -24,6 +24,11 @@ app.get('/habit', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/habit.html'));
 });
 
+app.get('/checklist', (req, res) => {
+  // Send the HTML file
+  res.sendFile(path.join(__dirname, 'public/checklist.html'));
+});
+
 app.get('/settings', (req, res) => {
   // Send the HTML file
   res.sendFile(path.join(__dirname, 'public/settings.html'));
