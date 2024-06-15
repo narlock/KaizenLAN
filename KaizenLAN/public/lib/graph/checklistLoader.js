@@ -1,6 +1,7 @@
 import * as KaizenGraphQL from './kaizenGraphInterface.js'
 
 async function createChecklist(name) {
+    name = name.replace(/ /g, '_');
     const mutation = `
         mutation {
             createChecklist(profileId: 1, name: "${name}", repeatEvery: "DAY") {
@@ -14,6 +15,7 @@ async function createChecklist(name) {
 }
 
 async function deleteChecklist(name) {
+    name = name.replace(/ /g, '_');
     const mutation = `
         mutation {
             deleteChecklist(profileId: 1, name: "${name}")
@@ -88,4 +90,19 @@ async function deleteChecklistItem(id) {
     return deleteChecklistItemResponse;
 }
 
-export { createChecklist, deleteChecklist, getChecklists, createChecklistItem, completeChecklistItem, deleteChecklistItem }
+async function getChecklistItems(checklistName) {
+    console.log(checklistName);
+    const query = `
+        query {
+            checklistItems(checklistName: "${checklistName}", profileId: 1) {
+                id
+                name
+                lastCompletedDate
+            }
+        }
+    `;
+    const getChecklistItemsResponse = KaizenGraphQL.request(query);
+    return getChecklistItemsResponse;
+}
+
+export { createChecklist, deleteChecklist, getChecklists, createChecklistItem, completeChecklistItem, deleteChecklistItem, getChecklistItems }

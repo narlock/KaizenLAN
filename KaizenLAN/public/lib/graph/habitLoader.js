@@ -23,6 +23,7 @@ async function getHabitInformation(habitName, profileId) {
 }
 
 async function saveHabit(habitName, profileId) {
+    habitName = habitName.replace(/ /g, '_');
     const mutation = `
         mutation {
             createHabit(name: "${habitName}", profileId: ${profileId}) {
@@ -47,6 +48,7 @@ async function saveHabitEntry(habitName, profileId, date) {
 }
 
 async function deleteHabit(habitName, profileId) {
+    habitName = habitName.replace(/ /g, '_');
     const mutation = `
         mutation {
             deleteHabit(name: "${habitName}", profileId: ${profileId})

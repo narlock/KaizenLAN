@@ -1,5 +1,7 @@
 import * as ProfileUtils from '.././lib/graph/profileLoader.js';
 import * as HabitLoader from '.././lib/graph/habitLoader.js';
+import * as ChecklistLoader from '.././lib/graph/checklistLoader.js';
+
 
 export async function saveChanges() {
     var profile = {
@@ -71,11 +73,20 @@ export async function populateForm(data) {
 }
 
 window.updateWidgets = async function () {
+    // Retrieve habits to add
     const habitNameResponse = await HabitLoader.getHabitNames(1);
     var HABIT_NAMES = habitNameResponse.map(item => "Habit" + item.name);
 
+    // Retrieve checklists to add
+    // TODO 
+    const checklists = await ChecklistLoader.getChecklists();
+    var CHECKLIST_NAMES = checklists.map(checklist => "Checklist" + checklist.name);
+
     var options = ["Profile", "Weight", "Water"];
     HABIT_NAMES.forEach(e => {
+        options.push(e);
+    });
+    CHECKLIST_NAMES.forEach(e => {
         options.push(e);
     });
 
@@ -90,7 +101,7 @@ window.updateWidgets = async function () {
         select.name = `widget${i}`;
         options.forEach(optionText => {
             let option = document.createElement('option');
-            option.value = optionText.toLowerCase();
+            option.value = optionText;
             option.innerText = optionText;
             select.appendChild(option);
         });

@@ -18,7 +18,8 @@ function displayHabitWidgetYear(habitName, entries, streak) {
 
     // Create and add habit header with name
     const habitHeader = document.createElement('h2');
-    habitHeader.textContent = habitName + streakText;
+    var readableHeaderString = habitName.replace(/_/g, ' ');
+    habitHeader.textContent = readableHeaderString + streakText;
     habitDiv.appendChild(habitHeader);
     
     // If an entry for the habit does not exist today, let's create the interface
@@ -30,7 +31,7 @@ function displayHabitWidgetYear(habitName, entries, streak) {
 
         // Create button with event action
         const completeHabitButton = document.createElement('button');
-        completeHabitButton.innerText = `Complete ${habitName} Today`;
+        completeHabitButton.innerText = `Complete ${readableHeaderString} Today`;
         completeHabitButton.id = `${habitName}CompleteButton`;
         completeHabitButton.addEventListener('click', function () {
             completeHabitForToday(todayAsString, habitName, 1);

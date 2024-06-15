@@ -5,6 +5,8 @@ import * as HabitWidget from '.././lib/habitWidget.js';
 import * as WeightLoader from '.././lib/graph/weightTrackLoader.js';
 import * as WeightWidget from '.././lib/weightWidget.js';
 import * as WaterWidget from '../lib/waterWidget.js';
+import * as ChecklistLoader from '../lib/graph/checklistLoader.js';
+import * as ChecklistWidget from '../lib/checklistWidget.js';
 
 var PROFILE;
 
@@ -57,7 +59,7 @@ function readProfileDataAndConfigureWidgets() {
 async function populateWidgetData(boxElement, widgetName) {
     // Depending on the widgetName, populate data accordingly
     switch(widgetName) {
-        case 'profile':
+        case 'Profile':
             // Add header to box
             const profileHeader = document.createElement('h2');
             profileHeader.textContent = 'Profile';
@@ -71,7 +73,7 @@ async function populateWidgetData(boxElement, widgetName) {
                 ProfileWidget.moveXpBarWithElement(xpBar, PROFILE.profile.xp, boxElement);
             }, 0);
             break;
-        case 'weight':
+        case 'Weight':
             const WEIGHT_ENTRIES = await WeightLoader.getWeightEntriesById(1);
             var weightWidget = await WeightWidget.createWidgetInterface(WEIGHT_ENTRIES);
             boxElement.appendChild(weightWidget);
@@ -81,7 +83,7 @@ async function populateWidgetData(boxElement, widgetName) {
             }, 0);
 
             break;
-        case 'water':
+        case 'Water':
             // Add header to box
             var waterWidget = await WaterWidget.createWaterInterface();
             console.log(waterWidget);
@@ -89,11 +91,16 @@ async function populateWidgetData(boxElement, widgetName) {
             break;
         default:
             // Check for habit widget
-            if(widgetName.startsWith("habit")) {
-                var habitName = capitalizeFirstLetter(widgetName.substring(5));
+            if(widgetName.startsWith("Habit")) {
+                var habitName = widgetName.substring(5);
                 var info = await HabitLoader.getHabitInformation(habitName, 1);
                 HabitWidget.displayMonthViewWidget(boxElement, habitName, info.entries, info.streak);
-            } else {
+            } else if(widgetName.startsWith("Checklist")) {
+                var checklistName = widgetName.substring(9);
+                var checklistItems = await ChecklistLoader.getChecklistItems(checklistName);
+                await ChecklistWidget.displayChecklistWidget(boxElement, checklistName, checklistItems.checklistItems);
+            }    
+            else {
                 const defaultHeader = document.createElement('h2');
                 defaultHeader.textContent = `Widget: ${widgetName}`;
                 boxElement.appendChild(defaultHeader);
