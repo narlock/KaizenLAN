@@ -1,0 +1,16 @@
+---
+layout: post
+title:  "KaizenLAN v1.0.0-b1"
+date:   2024-06-08 06:30:37 -0500
+categories: jekyll update
+---
+[View this release on GitHub](https://github.com/narlock/KaizenLAN/releases/tag/v1.0.0-b1)
+
+This is the first beta release of Kaizen LAN. The "Kaizen Beta v1.0.0" zip package below contains the following:
+- `setup.sh` for setting up Kaizen LAN
+- `start.sh` for starting Kaizen LAN
+- `stop.sh` for stopping Kaizen LAN
+- KaizenLAN code folder
+- api folder containing packages JAR files of each microservice
+
+For directions on setup, please read the [README](https://github.com/narlock/KaizenLAN?tab=readme-ov-file#running-kaizen-lan).
