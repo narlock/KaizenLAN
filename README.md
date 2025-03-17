@@ -64,18 +64,18 @@ To utilize all of the features of Kaizen LAN, you will need to designate a compu
 This application requires other applications to run alongside of it. These applications are outlined in the concept view.
 
 **Currently Implemented**
-- [Kaizen GraphQL API](https://github.com/narlock/kaizen-graphql-api)
-- [Kaizen Profile API](https://github.com/narlock/kaizen-profile-api)
-- [Narlock Weight Track API](https://github.com/narlock/narlock-weight-track-api)
-- [Narlock Water Track API](https://github.com/narlock/narlock-water-track-api)
-- [Narlock Habit Track API](https://github.com/narlock/narlock-habit-track-api)
+- [Kaizen GraphQL API](https://github.com/narlock/KaizenLAN/tree/main/graphql/kaizen-graphql-api)
+- [Kaizen Profile API](https://github.com/narlock/KaizenLAN/tree/main/rest/kaizen-profile-api)
+- [Narlock Weight Track API](https://github.com/narlock/KaizenLAN/tree/main/rest/narlock-weight-track-api)
+- [Narlock Water Track API](https://github.com/narlock/KaizenLAN/tree/main/rest/narlock-water-track-api)
+- [Narlock Habit Track API](https://github.com/narlock/KaizenLAN/tree/main/rest/narlock-habit-api)
 
 **Dependencies that will be added in future releases**
-- [Narlock Checklist API](https://github.com/narlock/narlock-checklist-api)
-- [Narlock Notepad API](https://github.com/narlock/narlock-notepad-api)
-- [Narlock Time Block API](https://github.com/narlock/narlock-time-block-api)
-- [Narlock Journal API](https://github.com/narlock/narlock-journal-api)
-- [Narlock Countdown Workout API](https://github.com/narlock/narlock-countdown-workout-api)
+- [Narlock Checklist API](https://github.com/narlock/KaizenLAN/tree/main/rest/narlock-checklist-api)
+- [Narlock Notepad API](https://github.com/narlock/KaizenLAN/tree/main/rest/simple-notepad-api)
+- [Narlock Time Block API](https://github.com/narlock/KaizenLAN/tree/main/rest/simple-time-block-api)
+- [Narlock Journal API](https://github.com/narlock/KaizenLAN/tree/main/rest/simple-journal-api)
+- [Narlock Countdown Workout API](https://github.com/narlock/KaizenLAN/tree/main/rest/countdown-workout-api)
 
 ## Starting the app
 
