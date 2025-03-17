@@ -1,0 +1,17 @@
+# The secrets.properties file is in the resources directory that contains the attributes lmysql.username/password
+spring.config.import: classpath:secrets.properties
+
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/narlock
+    username: ${lmysql.username}
+    password: ${lmysql.password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      naming:
+        # Modifying this physical strategy allows us to use the correct name of the table "CalendarEvent"
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl

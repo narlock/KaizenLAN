@@ -1,0 +1,120 @@
+{
+	"info": {
+		"_postman_id": "08e0e59a-6e2f-4aff-bb1d-1fd21c22da57",
+		"name": "Simple Journal API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33063116"
+	},
+	"item": [
+		{
+			"name": "Create Journal Entry",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"date\": \"2024-03-09\",\n    \"profileId\": 1,\n    \"box1\": \"hello world\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8084/journal",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"journal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Journal Entry",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8084/journal?date=2024-03-09&profileId=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"journal"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2024-03-09"
+						},
+						{
+							"key": "profileId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Journal Entry",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"date\": \"2024-03-09\",\n    \"profileId\": 1,\n    \"box1\": \"hello world\",\n    \"box2\": \"this is box 2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8084/journal",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"journal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Journal Entry",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8084/journal?date=2024-03-09&profileId=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"journal"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2024-03-09"
+						},
+						{
+							"key": "profileId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

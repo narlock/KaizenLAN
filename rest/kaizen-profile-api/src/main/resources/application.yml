@@ -1,0 +1,15 @@
+server:
+  port: 8079
+
+spring:
+  config:
+    import: "file:${user.home}/Documents/narlock/secrets/mysql.properties"
+  datasource:
+    url: jdbc:mysql://localhost:3306/narlock
+    username: ${lmysql.username}
+    password: ${lmysql.password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl

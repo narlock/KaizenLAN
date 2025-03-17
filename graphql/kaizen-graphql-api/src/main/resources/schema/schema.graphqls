@@ -1,0 +1,225 @@
+type Query {
+    # ###############################
+    #   PROFILE QUERIES
+    # ###############################
+    profile(id: ID!): Profile
+
+    # ###############################
+    #   CHECKLIST QUERIES
+    # ###############################
+    checklists(profileId: Int!): [Checklist!]
+    checklistItem(id: ID!, checklistName: String!, profileId: Int!): ChecklistItem
+    checklistItems(checklistName: String!, profileId: Int!): [ChecklistItem!]
+
+    # ###############################
+    #   HABIT QUERIES
+    # ###############################
+    habits(profileId: Int!): [Habit!]
+    habitEntryDate(name: String!, profileId: Int!, date: String!): String!
+    habitEntries(name: String!, profileId: Int!): [String!]
+    habitStreak(name: String!, profileId: Int!): Int!
+
+    # ###############################
+    #   WEIGHT TRACK QUERIES
+    # ###############################
+    weightEntry(profileId: Int!, entryDate: String!): WeightEntry
+    weightEntries(profileId: Int!): [WeightEntry!]
+    weightEntriesByRange(profileId: Int!, startDate: String!, endDate: String!): [WeightEntry!]
+
+    # ###############################
+    #   WATER TRACK QUERIES
+    # ###############################
+    waterEntry(profileId: Int!, entryDate: String!): WaterEntry
+    waterEntries(profileId: Int!): [WaterEntry!]
+    waterEntriesByRange(profileId: Int!, startDate: String!, endDate: String!): [WaterEntry!]
+
+    # ###############################
+    #   NOTEPAD QUERIES
+    # ###############################
+    fileContent(name: String!): String!
+    getFiles: [File!]
+    csvContent(name: String!): String!
+    getCSVs: [File!]
+}
+
+type Mutation {
+    # ###############################
+    #   PROFILE MUTATIONS
+    # ###############################
+    createProfile(input: ProfileInput!): Profile
+    updateProfile(input: ProfileInput!): Profile
+    deleteProfile(id: ID!): Boolean
+    addXpToProfile(id: Int!, xp: Int!): Profile
+
+    # ###############################
+    #   CHECKLIST MUTATIONS
+    # ###############################
+    createChecklist(name: String!, profileId: Int!, repeatEvery: String): Checklist
+    completeChecklistItem(id: ID!, checklistName: String!, profileId: Int!): ChecklistItem
+    updateChecklistRepeat(name: String!, profileId: Int!, repeatEvery: String!): Checklist
+    deleteChecklist(name: String!, profileId: Int!): Boolean
+    createChecklistItem(checklistItem: ChecklistItemInput!): ChecklistItem
+    updateChecklistItem(id: ID!, checklistItem: ChecklistItemInput!): ChecklistItem
+    updateChecklistItemStreak(id: ID!): ChecklistItem
+    deleteChecklistItem(id: ID!): Boolean
+
+    # ###############################
+    #   HABIT MUTATIONS
+    # ###############################
+    createHabit(name: String!, profileId: Int!): Habit!
+    createHabitEntry(name: String!, profileId: Int!, date: String!): HabitEntry!
+    deleteHabit(name: String!, profileId: Int!): Boolean
+
+    # ###############################
+    #   WEIGHT TRACK MUTATIONS
+    # ###############################
+    createWeightEntry(profileId: Int!, entryDate: String!, entryAmount: Float!): WeightEntry
+    updateWeightEntry(profileId: Int!, entryDate: String!, entryAmount: Float!): WeightEntry
+    deleteWeightEntriesByProfile(profileId: Int!): Boolean
+
+    # ###############################
+    #   WATER TRACK MUTATIONS
+    # ###############################
+    createWaterEntry(profileId: Int!, entryDate: String!, entryAmount: Int!): WaterEntry
+    addWaterToEntry(profileId: Int!, entryDate: String!, entryAmount: Int!): WaterEntry
+    deleteWaterEntriesByProfile(profileId: Int!): Boolean
+
+    # ###############################
+    #   NOTEPAD MUTATIONS
+    # ###############################
+    writeFile(name: String!, content: String!): Boolean
+    deleteFile(name: String!): Boolean
+    writeCSV(name: String!, content: String!): Boolean
+    deleteCSV(name: String!): Boolean
+}
+
+# ###############################
+#   PROFILE TYPES
+# ###############################
+type Profile {
+    profile: ProfileDetails
+    health: Health
+    rowInfoList: [RowInfo!]
+}
+
+type ProfileDetails {
+    id: ID!
+    username: String
+    birthDate: String
+    imageUrl: String
+    xp: Int
+    numRows: Int
+    pin: String
+}
+
+type Health {
+    height: Float
+    weight: Float
+    goalWeight: Float
+    goalWater: Float
+}
+
+type RowInfo {
+    profileId: Int
+    rowIndex: Int!
+    widgets: String
+}
+
+input ProfileInput {
+    profile: ProfileDetailsInput
+    health: HealthInput
+    rowInfoList: [RowInfoInput!]
+}
+
+input ProfileDetailsInput {
+    id: ID!
+    username: String
+    birthDate: String
+    imageUrl: String
+    xp: Int
+    numRows: Int
+    pin: String
+}
+
+input HealthInput {
+    height: Float
+    weight: Float
+    goalWeight: Float
+    goalWater: Float
+}
+
+input RowInfoInput {
+    profileId: Int!
+    rowIndex: Int!
+    widgets: String
+}
+
+# ###############################
+#   CHECKLIST TYPES
+# ###############################
+type Checklist {
+    name: String!
+    profileId: Int!
+    repeatEvery: String
+    items: [ChecklistItem!]
+}
+
+type ChecklistItem {
+    id: ID!
+    checklistName: String!
+    profileId: Int!
+    name: String!
+    description: String
+    lastCompletedDate: String
+    excludeDays: String
+    streak: Int
+}
+
+input ChecklistItemInput {
+    profileId: Int!
+    checklistName: String!
+    name: String!
+    description: String
+    lastCompletedDate: String
+    excludeDays: String
+}
+
+# ###############################
+#   HABIT TYPES
+# ###############################
+type Habit {
+    name: String!
+    profileId: Int!
+}
+
+type HabitEntry {
+    name: String!
+    profileId: Int!
+    date: String!
+}
+
+# ###############################
+#   WEIGHT TRACK TYPES
+# ###############################
+type WeightEntry {
+    profileId: Int!
+    entryDate: String!
+    entryAmount: Float!
+}
+
+# ###############################
+#   WATER TRACK TYPES
+# ###############################
+type WaterEntry {
+    profileId: Int!
+    entryDate: String!
+    entryAmount: Int!
+}
+
+# ###############################
+#   NOTEPAD TYPES
+# ###############################
+type File {
+    name: String!
+    lastModified: String!
+}

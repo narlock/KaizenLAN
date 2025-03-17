@@ -1,0 +1,344 @@
+{
+	"info": {
+		"_postman_id": "00427f4b-d838-45fe-853c-748f9a00ee11",
+		"name": "Countdown Workout API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33063116"
+	},
+	"item": [
+		{
+			"name": "Workout",
+			"item": [
+				{
+					"name": "Streak",
+					"item": [
+						{
+							"name": "Increment Streak",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "localhost:8082/countdown-workout/workout/1/streak",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"countdown-workout",
+										"workout",
+										"1",
+										"streak"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Reset Streak",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "localhost:8082/countdown-workout/workout/1/streak/reset",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"countdown-workout",
+										"workout",
+										"1",
+										"streak",
+										"reset"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Create Workout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Morning Stretch\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/countdown-workout/workout",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"countdown-workout",
+								"workout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Workout by ID",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Update Workout",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Morning Stretch\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/countdown-workout/workout/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"countdown-workout",
+								"workout",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Workout",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8082/countdown-workout/workout/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"countdown-workout",
+								"workout",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Exercise",
+			"item": [
+				{
+					"name": "Create Exercise",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Abdominal Crunches\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/countdown-workout/exercise",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"countdown-workout",
+								"exercise"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Exercise by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8082/countdown-workout/exercise/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"countdown-workout",
+								"exercise",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Exercise",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Ab Crunches\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/countdown-workout/exercise/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"countdown-workout",
+								"exercise",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Exercise",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8082/countdown-workout/exercise/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"countdown-workout",
+								"exercise",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Save Item",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"workoutId\": 1,\n    \"exerciseId\": 1,\n    \"itemIndex\": 2,\n    \"workTime\": 60,\n    \"breakTime\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/countdown-workout/exercise-item",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"countdown-workout",
+						"exercise-item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Item",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8082/countdown-workout/exercise-item?exerciseId=1&workoutId=1&itemIndex=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"countdown-workout",
+						"exercise-item"
+					],
+					"query": [
+						{
+							"key": "exerciseId",
+							"value": "1"
+						},
+						{
+							"key": "workoutId",
+							"value": "1"
+						},
+						{
+							"key": "itemIndex",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Item",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8082/countdown-workout/exercise-item?exerciseId=1&workoutId=1&itemIndex=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"countdown-workout",
+						"exercise-item"
+					],
+					"query": [
+						{
+							"key": "exerciseId",
+							"value": "1"
+						},
+						{
+							"key": "workoutId",
+							"value": "1"
+						},
+						{
+							"key": "itemIndex",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

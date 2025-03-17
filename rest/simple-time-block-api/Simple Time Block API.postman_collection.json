@@ -1,0 +1,145 @@
+{
+	"info": {
+		"_postman_id": "81773995-7d82-4061-abfb-25770e1dd2ea",
+		"name": "Simple Time Block API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33063116"
+	},
+	"item": [
+		{
+			"name": "Read by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/time-block/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"time-block",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all events",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/time-block",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"time-block"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create event",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"name\": \"My other event\",\n   \"note\": \"123 John Doe Drive, Gotham City\",\n   \"startTime\": \"12:00:00\",\n   \"endTime\": \"12:30:00\",\n   \"date\": \"2024-02-21\",\n   \"meta\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/time-block",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"time-block"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"name\": \"Yearly Eye Exam\",\n   \"note\": \"123 John Doe Drive, Gotham City\",\n   \"startTime\": \"16:00:00\",\n   \"endTime\": \"16:30:00\",\n   \"date\": \"2024-02-21\",\n   \"meta\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/time-block/30",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"time-block",
+						"30"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete by ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/time-block/30",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"time-block",
+						"30"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete by Date",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/time-block?date=2024-02-21",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"time-block"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2024-02-21"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

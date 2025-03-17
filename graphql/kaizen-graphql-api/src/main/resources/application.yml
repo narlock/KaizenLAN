@@ -1,0 +1,24 @@
+spring:
+  config:
+    import: "file:${user.home}/Documents/narlock/secrets/mysql.properties"
+
+kaizen:
+  host: "http://${lan.address}:"
+
+api:
+  profile:
+    context: "/profile"
+    port: 8079
+  checklist:
+    port: 8085
+  habit:
+    port: 8089
+  weight:
+    context: "/weight"
+    port: 8081
+  water:
+    context: "/water"
+    port: 8083
+  notepad:
+    context: "/notepad"
+    port: 8087
