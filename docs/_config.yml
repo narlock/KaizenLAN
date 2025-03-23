@@ -4,15 +4,19 @@ description: Kaizen - Continuously improve your life with helpful widgets - acce
 baseurl: ""
 
 # Build settings
-remote_theme: jekyll/minima
-plugins:
-  - jekyll-remote-theme
+remote_theme: jekyll/minima@1e8a445
 minima:
   skin: dark
   social_links:
-  - { platform: github, user_url: "https://github.com/narlock" }
-  - { platform: twitter, user_url: "https://twitter.com/narlockdev"}
-  - { platform: youtube, user_url: "https://youtube.com/@narlock"}
+    - title: GitHub profile
+      icon: github
+      url: "https://github.com/narlock"
+    - title: narlockdev on X (formerly Twitter)
+      icon: x-twitter
+      url: "https://twitter.com/narlockdev"
+    - title: narlock on YouTube
+      icon: youtube
+      url: "https://youtube.com/@narlock"
 
 header_pages:
   - install.markdown
